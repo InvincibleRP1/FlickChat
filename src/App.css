@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&display=swap');
+
+body {
+   background-color: rgb(14, 12, 12);
+   width: 100%;
+   height: 100%;
+   margin: 0px;
+   padding: 0px;
+}
+
+.App {
+   /* font-family: 'Jost', sans-serif; */
+   font-family: 'Commissioner', sans-serif;
+}
