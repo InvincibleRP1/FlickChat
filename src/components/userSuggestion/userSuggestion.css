@@ -1,9 +1,31 @@
 .user-list-area {
     position: fixed;
-    right: 0;
-    width: 23rem;
-    height: 70%;
+    right: 2px;
+    width: 18rem;
+    height: fit-content;
     border: 1px solid blue;
+}
+
+.user-list-area > h3 {
     text-align: center;
-    margin-left: 10px;
+}
+
+.user-lists {
+    list-style: none;
+    font-size: 13px;
+}
+
+.user-details {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    gap: 0rem;
+}
+
+.user-names > span {
+    color: rgb(154, 151, 151);
+}
+
+.user-area-action-btns {
+    margin: 15px;
 }

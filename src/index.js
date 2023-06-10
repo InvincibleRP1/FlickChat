@@ -7,6 +7,7 @@ import App from "./App";
 
 import { makeServer } from "./server";
 import { SocialDetailsHandler } from "./contexts/dataContext";
+import { AuthHandler } from "./contexts/authContext";
 
 // Call make Server
 makeServer();
@@ -15,9 +16,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <SocialDetailsHandler>
-        <App />
-      </SocialDetailsHandler>
+      <AuthHandler>
+        <SocialDetailsHandler>
+          <App />
+        </SocialDetailsHandler>
+      </AuthHandler>
     </BrowserRouter>
   </React.StrictMode>
 );

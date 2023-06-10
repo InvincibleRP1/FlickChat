@@ -1,0 +1,11 @@
+.login-area {
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+}
+
+.auth-action-btn {
+    width: 5rem;
+    margin-top: 10px;
+}
