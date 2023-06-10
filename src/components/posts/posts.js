@@ -1,22 +1,17 @@
+import { useContext } from "react"
+import { SocialDataContext } from "../../contexts/dataContext"
 
+import '../posts/posts.css';
 
-import "../userFeed/userFeed.css";
-import { TopNavigation } from "../../components/navbar/navbar";
-import { useContext } from "react";
-import { SocialDataContext } from "../../contexts/dataContext";
-import { SideNav } from "../../components/sidenavbar/sidenav";
-export const UserFeedPage = () => {
-  const { state, dispatch } = useContext(SocialDataContext);
+export const PostsPage = ({postsOnFeed}) => {
 
-  return (
-    <>
-      <TopNavigation></TopNavigation>
-      <div className="user-feed">
-        <SideNav/>
+    // const { state, dispatch } = useContext(SocialDataContext);
 
+    return (
+        <>
         <div className="post-area">
           <h1>Posts</h1>
-          {state?.posts.slice(0, 4).map((post) => {
+          {postsOnFeed.map((post) => {
             const {
               _id,
               content,
@@ -57,11 +52,6 @@ export const UserFeedPage = () => {
             );
           })}
         </div>
-
-        <div className="user-list-area">
-          <h1>Users</h1>
-        </div>
-      </div>
-    </>
-  );
-};
+        </>
+    )
+}

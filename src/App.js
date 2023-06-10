@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { APITest } from './pages/apiTest';
-import { UserFeedPage } from './pages/userFeed/userFeed';
+import { APITest } from './features/apiTest';
+import { UserFeedPage } from './features/userFeed/userFeed';
 
 function App() {
 

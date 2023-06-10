@@ -18,7 +18,7 @@ export const SideNav = () => {
                 Logout
             </NavLink> */}
 
-          <button className="sidenav-btn">Post</button>
+          <button className="sidenav-btn">Login</button>
         </div>
         </div>
     )

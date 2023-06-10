@@ -1,0 +1,9 @@
+.user-list-area {
+    position: fixed;
+    right: 0;
+    width: 23rem;
+    height: 70%;
+    border: 1px solid blue;
+    text-align: center;
+    margin-left: 10px;
+}
