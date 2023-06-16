@@ -18,9 +18,6 @@ export const SideNav = () => {
           <NavLink className="sidenav-links">Bookmarks</NavLink>
 
           <NavLink className="sidenav-links">Profile</NavLink>
-          {/* <NavLink>
-                Logout
-            </NavLink> */}
 
           {token ? <button className="sidenav-btn"
           onClick={handleLogout}

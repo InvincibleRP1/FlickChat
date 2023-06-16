@@ -28,6 +28,38 @@ export const SocialDetailsHandler = ({ children }) => {
     dispatch({ type: "initialize-users", users: users });
   };
 
+  // Posts
+
+  const handleCreatePosts = async(postData) => {
+
+    try {
+      if(token)
+      {
+        const response = await fetch("/api/posts", {
+          method: "POST",
+          headers: {
+            authorization: token,
+          },
+          body: JSON.stringify({postData: {
+            content: postData
+          }})
+        });
+
+       const { posts } = await response.json();
+
+       dispatch({ type: "initialize-posts", posts: posts });
+
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
+  
+
+  // Likes - Dislikes
+
   const postsLikedByUser = () => {
     const likedPosts = state?.posts?.filter((post) => {
       const {
@@ -126,24 +158,26 @@ export const SocialDetailsHandler = ({ children }) => {
 
   // Follow / Unfollow
 
-  const handleFollowUser = async(userId) => {
-
+  const handleFollowUser = async (userId) => {
     try {
-      const response = await fetch(`/api/users/follow/${userId}`, {
-        method: "POST",
-        headers: {
-          authorization: token,
-        }
-      });
+      if (token) {
+        const response = await fetch(`/api/users/follow/${userId}`, {
+          method: "POST",
+          headers: {
+            authorization: token,
+          },
+        });
 
-      const { user, followUser } = await response.json();
+        const { user, followUser } = await response.json();
 
-      console.log(user, followUser);
+        setCurrentUser(user);
 
+        dispatch({ type: "remove-suggested-user", userId });
+      }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     handleAPI();
@@ -157,13 +191,14 @@ export const SocialDetailsHandler = ({ children }) => {
       value={{
         state,
         dispatch,
+        handleCreatePosts,
         handleLikes,
         handleDislikes,
         postsLikedByUser,
         addToBookmarks,
         postPresentInBookmarks,
         removeFromBookmarks,
-        handleFollowUser
+        handleFollowUser,
       }}
     >
       {children}

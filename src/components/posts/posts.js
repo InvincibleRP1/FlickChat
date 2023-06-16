@@ -1,12 +1,43 @@
 import { useContext, useState } from "react";
+import Avatar from "react-avatar";
+
 import { SocialDataContext } from "../../contexts/dataContext";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faThumbsUp,
+  faComment,
+  faBookmark,
+  faShare,
+  faEllipsis,
+  faImage,
+  faFaceSmile,
+  faFire,
+  faRefresh
+} from "@fortawesome/free-solid-svg-icons";
+
 import "../posts/posts.css";
+import { AuthContext } from "../../contexts/authContext";
 
 export const PostsPage = ({ postsOnFeed }) => {
-  // const { state, dispatch } = useContext(SocialDataContext);
+  const { handleCreatePosts, dispatch, state } = useContext(SocialDataContext);
 
-  // const [isLiked, setIsLiked] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+
+  const [formData, setFormData] = useState("");
+  const [postUpdate, setPostUpdate] = useState(false);
+
+  const getFormValue = (e) => {
+    setFormData(e.target.value);
+  };
+
+  const createPost = () => {
+    if (formData !== "") {
+      handleCreatePosts(formData);
+    }
+
+    setFormData("");
+  };
 
   const {
     handleLikes,
@@ -14,7 +45,7 @@ export const PostsPage = ({ postsOnFeed }) => {
     postsLikedByUser,
     addToBookmarks,
     postPresentInBookmarks,
-    removeFromBookmarks
+    removeFromBookmarks,
   } = useContext(SocialDataContext);
 
   const likePost = (postId) => {
@@ -25,10 +56,80 @@ export const PostsPage = ({ postsOnFeed }) => {
     handleDislikes(postId);
   };
 
+  const handleSortValue = (sortValue) => {
+    dispatch({ type: "post-sort-method", value: sortValue });
+  };
+
+  // Post-Update
+
+  const handlePostUpdation = (postId) => {
+    console.log(postId)
+  }
+
   return (
     <>
       <div className="post-area">
-        <h1>Posts</h1>
+        <div className="create-post-section">
+          <Avatar
+            round={true}
+            src={currentUser?.avatar}
+            size="50"
+            className="post-avatar"
+          />
+
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            className="post-box"
+            placeholder="Share whats on your mind"
+            onChange={getFormValue}
+            value={formData}
+          ></textarea>
+        </div>
+
+        <div className="create-post-area">
+          <FontAwesomeIcon icon={faImage}
+          className="post-info"
+          />
+          <FontAwesomeIcon icon={faFaceSmile}
+          className="post-info"
+          />
+
+          <button className="post-create-btn" onClick={createPost}>
+            Post
+          </button>
+        </div>
+
+        <hr />
+
+        <div className="sort-posts-area">
+
+          <div onClick={() => handleSortValue("trending")}
+          className="sort-action-btn"
+          >
+          <FontAwesomeIcon
+            icon={faFire}
+         />
+            <span>Trending</span>
+          </div>
+          
+          
+
+        <div onClick={() => handleSortValue("latest")}
+         className="sort-action-btn"
+        >
+
+        <FontAwesomeIcon
+            icon={faRefresh}
+          />
+            <span>Latest</span>
+        </div>
+          
+          
+        </div>
+
         {postsOnFeed.map((post) => {
           const {
             _id,
@@ -40,6 +141,10 @@ export const PostsPage = ({ postsOnFeed }) => {
             createdAt,
           } = post;
 
+          const userFound = state?.users.find(
+            (user) => user.username === username
+          );
+
           const likedPost = postsLikedByUser()?.some(
             (post) => post._id === _id
           );
@@ -50,56 +155,88 @@ export const PostsPage = ({ postsOnFeed }) => {
             <div key={_id}>
               <ul className="post-details">
                 <li className="post-specs">
-                  <p className="user-name">
-                    {fullname}
-                    <br />
-                    <span>@{username}</span>
-                  </p>
+                  <FontAwesomeIcon
+                    icon={faEllipsis}
+                    className="post-update-section"
+                    onClick={() => handlePostUpdation(_id)}
+                  />
+
+                  {postUpdate && (
+                    <div className="post-update-section update-details">
+                      <p>Edit</p>
+                      <p>Delete</p>
+                    </div>
+                  )}
+
+                  <div className="post-creator-details">
+                    <Avatar
+                      name={fullname}
+                      src={userFound?.avatar}
+                      round={true}
+                      size="50"
+                    />
+
+                    <p className="user-name">
+                      {fullname}
+                      <br />
+                      <span>@{username}</span>
+                    </p>
+                  </div>
 
                   <p className="post-content">{content}</p>
                   {image && (
                     <img src={image} alt="username" className="content-image" />
                   )}
 
-                  {likedPost ? (
-                    <span>
-                      {likeCount}
-                      <button
-                        className="post-action-btns"
-                        onClick={() => dislikePost(_id)}
-                      >
-                        Dislike
-                      </button>
-                    </span>
-                  ) : (
-                    <span>
-                      {likeCount}
-                      <button
-                        className="post-action-btns"
-                        onClick={() => likePost(_id)}
-                      >
-                        Like
-                      </button>
-                    </span>
-                  )}
+                  <div className="action-btns">
+                    {likedPost ? (
+                      <>
+                        <p className="like-count">{likeCount}</p>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faThumbsUp}
+                            className="post-action-btns dislike-post"
+                            onClick={() => dislikePost(_id)}
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="like-count">{likeCount}</p>
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faThumbsUp}
+                            className="post-action-btns"
+                            onClick={() => likePost(_id)}
+                          />
+                        </div>
+                      </>
+                    )}
 
-                  <button className="post-action-btns">Comment</button>
+                    <FontAwesomeIcon
+                      icon={faComment}
+                      className="post-action-btns"
+                    />
 
-                  {bookmarkedPost ? (
-                    <button
+                    {bookmarkedPost ? (
+                      <FontAwesomeIcon
+                        icon={faBookmark}
+                        className="post-action-btns remove-bookmark"
+                        onClick={() => removeFromBookmarks(_id)}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faBookmark}
+                        className="post-action-btns"
+                        onClick={() => addToBookmarks(_id)}
+                      />
+                    )}
+
+                    <FontAwesomeIcon
+                      icon={faShare}
                       className="post-action-btns"
-                      onClick={() => removeFromBookmarks(_id)}
-                    >
-                      Unbookmark
-                    </button>
-                  ) : (
-                    <button
-                      className="post-action-btns"
-                      onClick={() => addToBookmarks(_id)}
-                    >
-                      Bookmark
-                    </button>
-                  )}
+                    />
+                  </div>
                 </li>
               </ul>
             </div>

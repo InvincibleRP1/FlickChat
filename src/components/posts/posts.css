@@ -5,14 +5,38 @@
 }
 
 .post-specs {
-    border: 1px solid green;
     padding: 10px;
+    box-shadow: 2px 2px 10px rgb(37, 37, 37);
     margin-bottom: 3rem;
 }
 
-.post-action-btns {
-    margin: 10px;
+.post-creator-details {
+    display: flex;
+    gap: 0.4rem;
 }
+
+.action-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.post-action-btns {
+    padding: 14px;
+    font-size: 22px;
+}
+
+.dislike-post {
+    color: rgb(208, 75, 48);
+}
+
+.remove-bookmark {
+    color: rgb(208, 75, 48);
+}
+
+.like-count {
+    margin-right: -13%;
+}
+
 
 .user-name {
     text-align: left;
@@ -35,4 +59,66 @@
 
 .content-image {
     width: 100%;
+}
+
+/* Create Post */
+
+.post-box {
+    resize: none;
+    background-color: black;
+    border: none;
+    color: white;
+    outline: black;
+}
+
+.create-post-section {
+    display: flex;
+    margin-top: 30px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+/* .avatar-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 80px;
+} */
+
+.post-avatar {
+margin-top: 10px;
+}
+
+.post-create-btn {
+    float: right;
+}
+
+.post-update-section {
+    float: right;
+}
+
+.update-details {
+    box-shadow: 2px 2px 10px solid grey;
+}
+
+.post-info {
+    margin: 5px;
+}
+
+
+
+/* Sort Posts */
+
+.sort-posts-area {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sort-action-btn {
+    cursor: pointer;
+    box-shadow: 1px 2px 5px rgba(107, 107, 107, 0.7);
+    padding: 5px;
+}
+
+.sort-action-btn > span {
+    margin: 0.4rem;
 }

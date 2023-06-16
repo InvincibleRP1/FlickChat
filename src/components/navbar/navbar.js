@@ -1,6 +1,9 @@
+import { useContext } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
+
 import { NavLink } from 'react-router-dom'
 import '../navbar/navbar.css'
-import { useContext } from 'react'
 import { AuthContext } from '../../contexts/authContext'
 export const TopNavigation = () => {
 
@@ -9,14 +12,20 @@ export const TopNavigation = () => {
     return (
         <>
         <div className="top-navigation">
-            <p>Logo</p>
+            <img src="https://ik.imagekit.io/qsdtqu5hp/flickchat-logo-removebg-preview.png?updatedAt=1686898029250" alt="" className='logo-img'/>
 
-            <label htmlFor="">
-                <input type="text" />
-                Search
-            </label>
+            <div className="search-box">
+            
+                <input type="text" placeholder='Search'/>
+                
+            
+            </div>
+            
 
-            <p>Mode</p>
+            <FontAwesomeIcon icon={faToggleOn}
+            className='display-mode'
+            />
+
             <NavLink to="/test">API Test</NavLink>
 
             <p>Hi {currentUser?.firstName}</p>
