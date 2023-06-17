@@ -7,7 +7,7 @@ import { formatDate } from "../utils/authUtils";
 
 export const users = [
   {
-    _id: uuid(),
+    _id: "user001",
     firstName: "The",
     lastName: "Cinefanatic",
     username: "cinefanatic",
@@ -20,7 +20,7 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
+    _id: "user002",
     firstName: "Rahul",
     lastName: "Pandey",
     username: "moviebuffrahul",
@@ -28,7 +28,7 @@ export const users = [
     password: "heythere234",
     followers: [
       {
-        _id: uuid(),
+        _id: "user003",
         firstName: "John",
         lastName: "Doe",
         username: "johndoe",
@@ -42,7 +42,7 @@ export const users = [
       },
 
       {
-        _id: uuid(),
+        _id: "user004",
         firstName: "Micheal",
         lastName: "Smith",
         username: "dazzlingsmiths",
@@ -57,7 +57,7 @@ export const users = [
     ],
     following: [
       {
-        _id: uuid(),
+        _id: "user004",
         firstName: "Micheal",
         lastName: "Smith",
         username: "dazzlingsmiths",
@@ -71,7 +71,7 @@ export const users = [
       },
 
       {
-        _id: uuid(),
+        _id: "user001",
         firstName: "The",
         lastName: "Cinefanatic",
         username: "cinefanatic",
@@ -93,7 +93,7 @@ export const users = [
   },
 
   {
-    _id: uuid(),
+    _id: "user003",
     firstName: "John",
     lastName: "Doe",
     username: "johndoe",
@@ -101,7 +101,7 @@ export const users = [
     password: "johndoe123",
     following: [
       {
-        _id: uuid(),
+        _id: "user002",
         firstName: "Rahul",
         lastName: "Pandey",
         username: "moviebuffrahul",
@@ -119,7 +119,7 @@ export const users = [
   },
 
   {
-    _id: uuid(),
+    _id: "user004",
     firstName: "Micheal",
     lastName: "Smith",
     username: "dazzlingsmiths",
@@ -139,7 +139,7 @@ export const users = [
 
     followers: [
       {
-        _id: uuid(),
+        _id: "user002",
         firstName: "Rahul",
         lastName: "Pandey",
         username: "moviebuffrahul",
@@ -157,7 +157,7 @@ export const users = [
   },
 
   {
-    _id: uuid(),
+    _id: "user005",
     firstName: "Barry",
     lastName: "Cooper",
     username: "theflash",
@@ -171,7 +171,7 @@ export const users = [
   },
 
   {
-    _id: uuid(),
+    _id: "user006",
     firstName: "Cine",
     lastName: "Prism",
     username: "cineprism",
@@ -185,7 +185,7 @@ export const users = [
   },
 
   {
-    _id: uuid(),
+    _id: "user007",
     firstName: "Harry",
     lastName: "Singh",
     username: "harrypaaji",

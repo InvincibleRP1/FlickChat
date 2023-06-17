@@ -56,6 +56,27 @@ export const SocialDetailsHandler = ({ children }) => {
   }
 
 
+  const deletePosts = async(postId) => {
+    try {
+      if(token)
+      {
+        const response = await fetch(`/api/posts/${postId}`, {
+          method: "DELETE",
+            headers: {
+              authorization: token,
+            }
+        })
+  
+        const { posts } = await response.json();
+  
+        dispatch({ type: "initialize-posts", posts: posts });
+      }
+     
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   
 
   // Likes - Dislikes
@@ -170,7 +191,9 @@ export const SocialDetailsHandler = ({ children }) => {
 
         const { user, followUser } = await response.json();
 
-        setCurrentUser(user);
+       setCurrentUser({...user, following: [...currentUser.following, followUser]})
+
+        // console.log(followUser)
 
         dispatch({ type: "remove-suggested-user", userId });
       }
@@ -179,12 +202,34 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   };
 
+
+  const handleUnfollowUser = async(userId) => {
+    console.log(userId);
+    try {
+      if(token)
+      {
+        const response = await fetch(`/api/users/unfollow/${userId}`, {
+          method: "POST",
+          headers: {
+            authorization: token,
+          },
+        });
+
+        const { user } = await response.json();
+
+        setCurrentUser(user);
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   useEffect(() => {
     handleAPI();
-  }, []);
+  }, [currentUser?.following, currentUser?.followers]);
 
   // console.log("Posts: ", state?.posts);
-  console.log(currentUser);
+  // console.log("current user details: ",currentUser);
 
   return (
     <SocialDataContext.Provider
@@ -192,6 +237,7 @@ export const SocialDetailsHandler = ({ children }) => {
         state,
         dispatch,
         handleCreatePosts,
+        deletePosts,
         handleLikes,
         handleDislikes,
         postsLikedByUser,
@@ -199,6 +245,7 @@ export const SocialDetailsHandler = ({ children }) => {
         postPresentInBookmarks,
         removeFromBookmarks,
         handleFollowUser,
+        handleUnfollowUser
       }}
     >
       {children}

@@ -20,12 +20,12 @@ import "../posts/posts.css";
 import { AuthContext } from "../../contexts/authContext";
 
 export const PostsPage = ({ postsOnFeed }) => {
-  const { handleCreatePosts, dispatch, state } = useContext(SocialDataContext);
+  const { handleCreatePosts, deletePosts, dispatch, state } = useContext(SocialDataContext);
 
   const { currentUser } = useContext(AuthContext);
 
   const [formData, setFormData] = useState("");
-  const [postUpdate, setPostUpdate] = useState(false);
+  const [postUpdate, setPostUpdate] = useState("");
 
   const getFormValue = (e) => {
     setFormData(e.target.value);
@@ -46,6 +46,7 @@ export const PostsPage = ({ postsOnFeed }) => {
     addToBookmarks,
     postPresentInBookmarks,
     removeFromBookmarks,
+    handleUnfollowUser
   } = useContext(SocialDataContext);
 
   const likePost = (postId) => {
@@ -63,7 +64,12 @@ export const PostsPage = ({ postsOnFeed }) => {
   // Post-Update
 
   const handlePostUpdation = (postId) => {
-    console.log(postId)
+    setPostUpdate((prevVal) => (prevVal === postId ? null : postId));
+  };
+  
+  const unfollowUser = (userId) => {
+    console.log(userId);
+    handleUnfollowUser(userId);
   }
 
   return (
@@ -141,9 +147,9 @@ export const PostsPage = ({ postsOnFeed }) => {
             createdAt,
           } = post;
 
-          const userFound = state?.users.find(
-            (user) => user.username === username
-          );
+
+          const userFound = state.users.find(
+            (user) => user.username === username)
 
           const likedPost = postsLikedByUser()?.some(
             (post) => post._id === _id
@@ -161,12 +167,21 @@ export const PostsPage = ({ postsOnFeed }) => {
                     onClick={() => handlePostUpdation(_id)}
                   />
 
-                  {postUpdate && (
+                  {(postUpdate === _id && currentUser.username === username) ? (
                     <div className="post-update-section update-details">
-                      <p>Edit</p>
-                      <p>Delete</p>
+                      <p className="update-options">Edit</p>
+                      <hr />
+                      <p className="update-options"
+                      onClick={() => deletePosts(_id)}
+                      >Delete</p>
                     </div>
-                  )}
+                  ) : (postUpdate === _id && currentUser.username !== username) ? (
+                    <div className="post-update-section update-details">
+                      <p className="update-options"
+                      onClick={() => unfollowUser(userFound?._id)}
+                      >Unfollow</p>
+                    </div>
+                  ) : ""}
 
                   <div className="post-creator-details">
                     <Avatar
