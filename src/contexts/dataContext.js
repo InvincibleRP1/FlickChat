@@ -224,6 +224,23 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   }
 
+  // Sort Posts
+  const postsAfterSorting = (posts) => {
+    let duplicatedPosts = [...posts];
+
+    if (state?.sortValue === "trending") {
+      return (duplicatedPosts = [...posts].sort(
+        (a, b) => b.likes.likeCount - a.likes.likeCount
+      ));
+    } else if (state?.sortValue === "latest") {
+      return (duplicatedPosts = [...posts].sort((a, b) => b.createdAt - a.createdAt)).reverse();
+    }
+
+    return duplicatedPosts;
+  };
+
+  // const postsOnDisplay = postsAfterSorting(postsOnUserFeed);
+
   useEffect(() => {
     handleAPI();
   }, [currentUser?.following, currentUser?.followers]);
@@ -238,6 +255,7 @@ export const SocialDetailsHandler = ({ children }) => {
         dispatch,
         handleCreatePosts,
         deletePosts,
+        postsAfterSorting,
         handleLikes,
         handleDislikes,
         postsLikedByUser,

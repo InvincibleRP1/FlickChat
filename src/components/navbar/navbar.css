@@ -5,12 +5,12 @@
     right: 0;
     width: 99.6%;
     z-index: 10;
-    border: 1px solid sandybrown;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     padding: 3px;
-    background-color: #ffcd90;
+    background-color: #534444;
+    color: azure;
     margin: -8px -8px;
 }
 
@@ -18,17 +18,7 @@
     width: 150px;
 }
 
-.search-box {
-    background-color: white;
-    padding: 10px;
-    border-radius: 8px;
-    width: 30%;
-}
 
-.search-box > input {
-    border: none;
-    outline: none;
-}
 
 .display-mode {
     font-size: 30px;

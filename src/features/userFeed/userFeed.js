@@ -9,7 +9,7 @@ import { PostsPage } from "../../components/posts/posts";
 import { AuthContext } from "../../contexts/authContext";
 
 export const UserFeedPage = () => {
-  const { state } = useContext(SocialDataContext);
+  const { state, postsAfterSorting } = useContext(SocialDataContext);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -25,19 +25,6 @@ export const UserFeedPage = () => {
       currentUser?.username === user.username
   );
 
-  const postsAfterSorting = (posts) => {
-    let duplicatedPosts = [...posts];
-
-    if (state?.sortValue === "trending") {
-      return (duplicatedPosts = [...posts].sort(
-        (a, b) => b.likes.likeCount - a.likes.likeCount
-      ));
-    } else if (state?.sortValue === "latest") {
-      return (duplicatedPosts = [...posts].sort((a, b) => b.createdAt - a.createdAt)).reverse();
-    }
-
-    return duplicatedPosts;
-  };
 
   const postsOnDisplay = postsAfterSorting(postsOnUserFeed);
   

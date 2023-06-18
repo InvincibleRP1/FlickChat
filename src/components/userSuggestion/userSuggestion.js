@@ -10,6 +10,10 @@ export const UserSuggestion = () => {
 
   const { token, currentUser } = useContext(AuthContext);
 
+  const handleSearchValue = (e) => {
+    dispatch({type: "search-value", value: e.target.value});
+  }
+
   const filteredUsers = state?.users.filter(
     (user) =>
       user.username !== currentUser?.username &&
@@ -18,12 +22,24 @@ export const UserSuggestion = () => {
       )
   );
 
+  const usersOnList = filteredUsers.filter((user) => user.firstName.trim().toLowerCase().includes(state?.searchValue.trim().toLowerCase()) || user.lastName.toLowerCase().trim().includes(state?.searchValue.toLowerCase().trim() || user.username.trim().toLowerCase().includes(state?.searchValue.toLowerCase().trim())));
+
+
   return (
     <>
       <div className="user-list-area">
+
+      <div className="search-box">
+            
+            <input type="text" placeholder='Search'
+            onChange={handleSearchValue}
+            />
+            
+        
+        </div>
         <h3>Suggested Users</h3>
         <ul className="user-lists">
-          {filteredUsers.map((user) => {
+          {usersOnList.length > 0 && usersOnList?.map((user) => {
             const { _id, firstName, lastName, username, avatar, bio } = user;
 
             return (
@@ -51,6 +67,8 @@ export const UserSuggestion = () => {
               </div>
             );
           })}
+
+          {usersOnList.length === 0 && <p>No such user found!</p>}
         </ul>
       </div>
     </>

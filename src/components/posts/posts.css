@@ -17,6 +17,7 @@
 
 .action-btns {
     display: flex;
+    color: antiquewhite;
     justify-content: space-evenly;
 }
 
@@ -40,6 +41,7 @@
 
 .user-name {
     text-align: left;
+    color: azure;
     font-weight: 800;
     margin: 5px;
 }
@@ -50,6 +52,7 @@
 
 .post-details {
     list-style: none;
+    margin-top: 4rem;
 }
 
 .post-content {
@@ -65,7 +68,7 @@
 
 .post-box {
     resize: none;
-    background-color: black;
+    background-color: #503737;
     border: none;
     color: white;
     outline: black;
@@ -74,8 +77,19 @@
 .create-post-section {
     display: flex;
     margin-top: 30px;
-    border-radius: 10px;
-    background-color: black;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: #503737;
+}
+
+.post-create-btn {
+    padding: 5px;
+    width: 5rem;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #c2c8e9;
+    border-radius: 8px;
 }
 
 /* .avatar-img {
@@ -94,12 +108,13 @@ margin-top: 10px;
 
 .post-update-section {
     float: right;
+    color: antiquewhite;
 }
 
 .update-details {
     position: absolute;
     right: 30rem;
-    padding: 3px;
+    padding: 4px;
     text-align: center;
     width: 5rem;
     font-weight: bold;
@@ -118,6 +133,13 @@ margin-top: 10px;
     margin: 5px;
 }
 
+.no-bookmarks-title {
+    text-align: center;
+    color: white;
+    margin-top: 5rem;
+    font-size: 20px;
+}
+
 
 
 /* Sort Posts */
@@ -127,10 +149,22 @@ margin-top: 10px;
     justify-content: space-evenly;
 }
 
+.sort-post-denote {
+    text-transform: uppercase;
+    font-size: 13px;
+    color: azure;
+    text-decoration: underline;
+    text-align: right;
+    margin-top: 36px;
+    margin-bottom: -35px;
+
+}
+
 .sort-action-btn {
     cursor: pointer;
     box-shadow: 1px 2px 5px rgba(107, 107, 107, 0.7);
     padding: 5px;
+    color: azure;
     border-radius: 10px;
 }
 

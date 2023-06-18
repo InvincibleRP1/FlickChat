@@ -14,12 +14,7 @@ export const TopNavigation = () => {
         <div className="top-navigation">
             <img src="https://ik.imagekit.io/qsdtqu5hp/flickchat-logo-removebg-preview.png?updatedAt=1686898029250" alt="" className='logo-img'/>
 
-            <div className="search-box">
             
-                <input type="text" placeholder='Search'/>
-                
-            
-            </div>
             
 
             <FontAwesomeIcon icon={faToggleOn}
