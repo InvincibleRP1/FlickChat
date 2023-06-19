@@ -2,7 +2,9 @@ export const initialState = {
   posts: [],
   users: [],
   sortValue: "",
-  searchValue: ""
+  searchValue: "",
+  userPosts: [],
+  userProfile: []
 };
 
 export const socialReducer = (currentState, action) => {
@@ -28,6 +30,16 @@ export const socialReducer = (currentState, action) => {
      case "search-value":
       return {...currentState,
       searchValue: action.value}
+
+    case "individual-user-posts":
+      return {...currentState,
+      userPosts: action.posts
+      }
+
+    case "individual-user-profile":
+      return {...currentState,
+      userProfile: action.profile
+      }
 
     default:
       return currentState;

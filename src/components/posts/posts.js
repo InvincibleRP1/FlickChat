@@ -15,11 +15,11 @@ import {
 import "../posts/posts.css";
 import { AuthContext } from "../../contexts/authContext";
 import { CreatePosts } from "./createPosts";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SortPosts } from "../sort-posts/sortPosts";
 
 export const PostsPage = ({ postsOnFeed }) => {
-  const { handleCreatePosts, deletePosts, dispatch, state } =
+  const { handleCreatePosts, deletePosts, getSingleUser, dispatch, state } =
     useContext(SocialDataContext);
 
   const { currentUser } = useContext(AuthContext);
@@ -29,6 +29,7 @@ export const PostsPage = ({ postsOnFeed }) => {
   const [postUpdate, setPostUpdate] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getFormValue = (e) => {
     setFormData(e.target.value);
@@ -41,6 +42,11 @@ export const PostsPage = ({ postsOnFeed }) => {
 
     setFormData("");
   };
+
+  const checkIndividualUser = (userId) => {
+    getSingleUser(userId);
+    navigate(`/profile/${userId}`);
+  }
 
   const {
     handleLikes,
@@ -81,7 +87,7 @@ export const PostsPage = ({ postsOnFeed }) => {
           showCreatePost={location?.pathname === "/" ? true : false}
         />
 
-        <div>
+        <div style={{display: location.pathname === "/profile" ? "none" : ""}}>
         <SortPosts />
         {state?.sortValue && <p
         className="sort-post-denote"
@@ -146,11 +152,13 @@ export const PostsPage = ({ postsOnFeed }) => {
                   )}
 
                   <div className="post-creator-details">
+
                     <Avatar
                       name={fullname}
                       src={userFound?.avatar}
                       round={true}
                       size="50"
+                      onClick={() => checkIndividualUser(userFound._id)}
                     />
 
                     <p className="user-name">

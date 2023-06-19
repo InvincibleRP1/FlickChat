@@ -5,6 +5,8 @@ import { UserFeedPage } from './features/userFeed/userFeed';
 import { LoginPage } from './features/auth/login';
 import { BookmarksPage } from './features/bookmarks/bookmarks';
 import { ExplorePage } from './features/explore/explore';
+import { ProfilePage } from './features/profile/profile';
+import { IndividualUser } from './features/individual-user/individualUser';
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
       <Route path='/' element={<UserFeedPage />}/>
       <Route path='/bookmarks' element={<BookmarksPage />}/>
       <Route path='/explore' element={<ExplorePage />}/>
+      <Route path='/profile' element={<ProfilePage />}/>
+      <Route path='/profile/:userId' element={<IndividualUser />}/>
 
       <Route path='/test' element={<APITest />}/>
 

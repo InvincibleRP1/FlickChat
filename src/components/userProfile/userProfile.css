@@ -1,0 +1,51 @@
+.profile-area {
+    box-shadow: 0px 5px 10px #6563631f;
+    width: 45rem;
+    position: relative;
+    left: 25%;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    color: azure;
+}
+
+.profile-info {
+    text-align: center;
+    font-size: 20px;
+}
+
+.username {
+    color: grey;
+    font-size: 16px;
+}
+
+.social-details {
+    display: flex;
+    gap: 5rem;
+    padding: 15px;
+    box-shadow: 1px 4px 9px rgb(32, 30, 30);
+    text-align: center;
+}
+
+.user-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(216, 141, 83);
+    font-weight: bold;
+}
+
+.user-post-area > p {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 18px;
+    margin-bottom: -35px;
+}
+
+.profile-action-btn {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #daffef;
+    font-weight: 600;
+}

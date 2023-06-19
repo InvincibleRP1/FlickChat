@@ -35,7 +35,6 @@ export const UserSuggestion = () => {
             onChange={handleSearchValue}
             />
             
-        
         </div>
         <h3>Suggested Users</h3>
         <ul className="user-lists">

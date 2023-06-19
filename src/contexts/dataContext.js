@@ -28,6 +28,21 @@ export const SocialDetailsHandler = ({ children }) => {
     dispatch({ type: "initialize-users", users: users });
   };
 
+  // Users
+
+  const getSingleUser = async(userId) => {
+    try {
+      const response = await fetch(`/api/users/${userId}`);
+
+      const { user } = await response.json();
+
+     dispatch({type: "individual-user-profile", profile: user});
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   // Posts
 
   const handleCreatePosts = async(postData) => {
@@ -72,6 +87,19 @@ export const SocialDetailsHandler = ({ children }) => {
         dispatch({ type: "initialize-posts", posts: posts });
       }
      
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const getIndividualPosts = async(username) => {
+    try {
+      const response = await fetch(`/api/posts/user/${username}`);
+
+      const { posts } = await response.json();
+
+      dispatch({type: "individual-user-posts", posts});
 
     } catch (error) {
       console.log(error.message);
@@ -248,6 +276,8 @@ export const SocialDetailsHandler = ({ children }) => {
   // console.log("Posts: ", state?.posts);
   // console.log("current user details: ",currentUser);
 
+  // console.log(state?.userPosts, "user posts");
+
   return (
     <SocialDataContext.Provider
       value={{
@@ -255,6 +285,8 @@ export const SocialDetailsHandler = ({ children }) => {
         dispatch,
         handleCreatePosts,
         deletePosts,
+        getIndividualPosts,
+
         postsAfterSorting,
         handleLikes,
         handleDislikes,
@@ -263,7 +295,9 @@ export const SocialDetailsHandler = ({ children }) => {
         postPresentInBookmarks,
         removeFromBookmarks,
         handleFollowUser,
-        handleUnfollowUser
+        handleUnfollowUser,
+
+        getSingleUser
       }}
     >
       {children}
