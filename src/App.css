@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Commissioner&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
 
 body {
    /* background-color: rgb(14, 12, 12); */
@@ -12,7 +13,8 @@ body {
 
 .App {
    /* font-family: 'Jost', sans-serif; */
-   font-family: 'Commissioner', sans-serif;
+   /* font-family: 'Commissioner', sans-serif; */
+   font-family: 'DM Sans', sans-serif;
 }
 
 .page-heading {

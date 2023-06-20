@@ -12,7 +12,9 @@ export const SideNav = () => {
     return {
       fontWeight : isActive ? "bolder" : "",
       fontSize: isActive ? "18px" : "",
-      // textDecoration: isActive ? "underline" : ""
+      background: isActive ? `rgb(96, 50, 50, 0.4)` : "",
+      padding: isActive ? "10px" : "",
+      borderRadius: isActive? "20px" : ""
     }
   }
 

@@ -2,8 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
-  useReducer,
-  useState,
+  useReducer
 } from "react";
 
 import { initialState, socialReducer } from "../reducer/socialDetailsReducer";
@@ -37,6 +36,25 @@ export const SocialDetailsHandler = ({ children }) => {
       const { user } = await response.json();
 
      dispatch({type: "individual-user-profile", profile: user});
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const editUserProfile = async(dataByUser) => {
+    try {
+      const response = await fetch('/api/users/edit', {
+        method: "POST",
+        headers: {
+          authorization: token,
+        },
+        body: JSON.stringify({userData: dataByUser})
+      });
+
+      const { user } = await response.json();
+      
+      setCurrentUser(user);
 
     } catch (error) {
       console.log(error.message);
@@ -159,52 +177,7 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   };
 
-  // Bookmarks
-
-  const addToBookmarks = async (postId) => {
-    try {
-      if (token) {
-        const response = await fetch(`/api/users/bookmark/${postId}`, {
-          method: "POST",
-          headers: {
-            authorization: token,
-          },
-        });
-
-        const { bookmarks } = await response.json();
-
-        setCurrentUser({ ...currentUser, bookmarks });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const postPresentInBookmarks = (postId) => {
-    const bookmarkedPost = currentUser?.bookmarks.some((id) => id === postId);
-
-    return bookmarkedPost;
-  };
-
-  const removeFromBookmarks = async (postId) => {
-    try {
-      if (token) {
-        const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
-          method: "POST",
-          headers: {
-            authorization: token,
-          },
-        });
-
-        const { bookmarks } = await response.json();
-
-        setCurrentUser({ ...currentUser, bookmarks });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
+  
   // Follow / Unfollow
 
   const handleFollowUser = async (userId) => {
@@ -286,18 +259,18 @@ export const SocialDetailsHandler = ({ children }) => {
         handleCreatePosts,
         deletePosts,
         getIndividualPosts,
-
         postsAfterSorting,
+        
         handleLikes,
         handleDislikes,
         postsLikedByUser,
-        addToBookmarks,
-        postPresentInBookmarks,
-        removeFromBookmarks,
+
+
         handleFollowUser,
         handleUnfollowUser,
 
-        getSingleUser
+        getSingleUser,
+        editUserProfile
       }}
     >
       {children}

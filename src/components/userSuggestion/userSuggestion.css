@@ -22,6 +22,11 @@
     justify-content: space-between;
     border-bottom: 0.3px solid rgb(96, 96, 96);
     gap: 0rem;
+    
+}
+
+.user-names {
+    cursor: pointer;
 }
 
 .user-names > span {

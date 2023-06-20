@@ -5,9 +5,10 @@
 }
 
 .post-specs {
-    padding: 10px;
-    box-shadow: 2px 2px 10px rgb(37, 37, 37);
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgb(37, 37, 37);
     margin-bottom: 3rem;
+    border-radius: 10px;
 }
 
 .post-creator-details {
@@ -42,7 +43,7 @@
 .user-name {
     text-align: left;
     color: azure;
-    font-weight: 800;
+    font-weight: bold;
     margin: 5px;
 }
 
@@ -138,6 +139,10 @@ margin-top: 10px;
     color: white;
     margin-top: 5rem;
     font-size: 20px;
+}
+
+.post-creator-details {
+    cursor: pointer;
 }
 
 

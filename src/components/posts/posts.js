@@ -17,6 +17,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { CreatePosts } from "./createPosts";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SortPosts } from "../sort-posts/sortPosts";
+import { BookmarkContext } from "../../contexts/bookmarksContext";
 
 export const PostsPage = ({ postsOnFeed }) => {
   const { handleCreatePosts, deletePosts, getSingleUser, dispatch, state } =
@@ -52,11 +53,14 @@ export const PostsPage = ({ postsOnFeed }) => {
     handleLikes,
     handleDislikes,
     postsLikedByUser,
+    handleUnfollowUser
+  } = useContext(SocialDataContext);
+
+  const { 
     addToBookmarks,
     postPresentInBookmarks,
-    removeFromBookmarks,
-    handleUnfollowUser,
-  } = useContext(SocialDataContext);
+    removeFromBookmarks
+  } = useContext(BookmarkContext);
 
   const likePost = (postId) => {
     handleLikes(postId);
@@ -87,7 +91,7 @@ export const PostsPage = ({ postsOnFeed }) => {
           showCreatePost={location?.pathname === "/" ? true : false}
         />
 
-        <div style={{display: location.pathname === "/profile" ? "none" : ""}}>
+        <div style={{display: location.pathname === "/" || location.pathname === "/explore" ? "" : "none"}}>
         <SortPosts />
         {state?.sortValue && <p
         className="sort-post-denote"
@@ -151,18 +155,19 @@ export const PostsPage = ({ postsOnFeed }) => {
                     ""
                   )}
 
-                  <div className="post-creator-details">
+                  <div className="post-creator-details"
+                  onClick={() => checkIndividualUser(userFound._id)}
+                  >
 
                     <Avatar
                       name={fullname}
                       src={userFound?.avatar}
                       round={true}
                       size="50"
-                      onClick={() => checkIndividualUser(userFound._id)}
                     />
 
                     <p className="user-name">
-                      {fullname}
+                      {userFound?.firstName.concat(" ").concat(userFound?.lastName)}
                       <br />
                       <span>@{username}</span>
                     </p>

@@ -17,10 +17,14 @@ export const TopNavigation = () => {
           className="logo-img"
         />
 
+<NavLink to="/test">API Test</NavLink>
+
         <div className="nav-details">
           <FontAwesomeIcon icon={faToggleOn} className="display-mode" />
           <p>Hi {currentUser?.firstName}</p>
         </div>
+
+        
       </div>
     </>
   );

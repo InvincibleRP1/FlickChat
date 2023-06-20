@@ -1,14 +1,17 @@
 .profile-area {
-    box-shadow: 0px 5px 10px #6563631f;
     width: 45rem;
     position: relative;
     left: 25%;
     top: 2rem;
+    padding: 15px;
+    color: azure;
+}
+
+.user-details-section {
+    box-shadow: 0px 5px 10px #6563631f;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
-    color: azure;
 }
 
 .profile-info {
@@ -49,3 +52,81 @@
     background-color: #daffef;
     font-weight: 600;
 }
+
+/* Edit Form Modal */
+
+.edit-form-modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 15%;
+    top: 8%;
+    background-color: rgb(164, 145, 121);
+    color: black;
+    font-weight: 600;
+    border-radius: 20px;
+    box-shadow: 2px 3px 5px black;
+    padding: 20px;
+    width: 30rem;
+}
+
+textarea {
+    width: 90%;
+    resize: none;
+    font-weight: bold;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.name-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.name-inputs > input,
+.user-links > input {
+    padding: 4px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+}
+
+.name-inputs > input:focus {
+    border: 5px solid skyblue;
+}
+
+.user-links > input {
+    width: 20rem;
+}
+
+.user-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-action-btns {
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+    margin-top: 20px;
+    margin-left: 40%;
+}
+.action-btn {
+    padding: 5px;
+    border: none;
+    font-weight: bold;
+    background-color: #daffef;
+    border-radius: 10px;
+}
+
+.close-btn {
+    background-color: rgb(184, 29, 29);
+    color: white;
+}
+
+

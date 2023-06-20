@@ -4,11 +4,14 @@ import Avatar from "react-avatar";
 import { SocialDataContext } from "../../contexts/dataContext";
 import "../userSuggestion/userSuggestion.css";
 import { AuthContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export const UserSuggestion = () => {
-  const { state, dispatch, handleFollowUser } = useContext(SocialDataContext);
+  const { state, dispatch, handleFollowUser, getSingleUser } = useContext(SocialDataContext);
 
   const { token, currentUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSearchValue = (e) => {
     dispatch({type: "search-value", value: e.target.value});
@@ -23,6 +26,11 @@ export const UserSuggestion = () => {
   );
 
   const usersOnList = filteredUsers.filter((user) => user.firstName.trim().toLowerCase().includes(state?.searchValue.trim().toLowerCase()) || user.lastName.toLowerCase().trim().includes(state?.searchValue.toLowerCase().trim() || user.username.trim().toLowerCase().includes(state?.searchValue.toLowerCase().trim())));
+
+  const checkIndividualUser = (userId) => {
+    getSingleUser(userId);
+    navigate(`/profile/${userId}`);
+  }
 
 
   return (
@@ -44,6 +52,7 @@ export const UserSuggestion = () => {
             return (
               <div key={_id}>
                 <li className="user-details">
+                  
                   <Avatar
                     round={true}
                     src={avatar}
@@ -51,7 +60,9 @@ export const UserSuggestion = () => {
                     size="50"
                   />
 
-                  <p className="user-names">
+                  <p className="user-names"
+                  onClick={() => checkIndividualUser(_id)}
+                  >
                     {firstName} {lastName} <br />
                     <span>@{username}</span>
                   </p>
