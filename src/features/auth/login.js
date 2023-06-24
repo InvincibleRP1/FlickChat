@@ -1,8 +1,13 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import { NavLink } from "react-router-dom";
 
 import "../auth/auth.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TopNavigation } from "../../components/navbar/navbar";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +17,8 @@ export const LoginPage = () => {
 
   const { handleLogin, token } = useContext(AuthContext);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,6 +27,10 @@ export const LoginPage = () => {
       username: "moviebuffrahul",
       password: "heythere234",
     });
+  };
+
+  const passwordToggle = () => {
+    setShowPassword((prevVal) => !prevVal);
   };
 
   useEffect(() => {
@@ -35,33 +46,58 @@ export const LoginPage = () => {
   return (
     <>
       <div className="login-area">
-        <label htmlFor="">
-          <input
-            type="text"
-            onChange={(e) =>
-              setFormData({ ...formData, username: e.target.value })
-            }
-            value={formData.username}
-          />
-          Enter Username
-        </label>
+        <TopNavigation />
+        <div className="login-container">
+          <h3>Login</h3>
+          <div className="input-area">
+            <input
+              type="text"
+              onChange={(e) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
+              value={formData.username}
+              placeholder="Enter Username"
+              className="login-input-field"
+            />
 
-        <label htmlFor="">
-          <input
-            type="password"
-            name=""
-            id=""
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            value={formData.password}
-          />
-          Enter Password
-        </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name=""
+              id=""
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              value={formData.password}
+              placeholder="Enter Password"
+              className="login-input-field"
+            />
 
-        <button className="auth-action-btn" onClick={loggingIn}>
-          Login
-        </button>
+            {showPassword ? (
+              <FontAwesomeIcon
+                icon={faEyeSlash}
+                className="password-visibility-toggle"
+                onClick={passwordToggle}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faEye}
+                className="password-visibility-toggle"
+                onClick={passwordToggle}
+              />
+            )}
+          </div>
+
+          <div className="signin-buttons">
+            <button className="auth-action-btn">Log In</button>
+            <button className="auth-action-btn" onClick={loggingIn}>
+              Login with test credentials
+            </button>
+          </div>
+
+          <NavLink className="account-navigate" to="/signup">
+          Create new account
+        </NavLink>
+        </div>
       </div>
     </>
   );

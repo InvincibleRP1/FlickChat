@@ -41,6 +41,29 @@ export const AuthHandler = ({ children }) => {
     navigate("/login");
   };
 
+  //Signup
+
+  const handleSignUp = async (firstName, lastName, email, username, password) => {
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify({ firstName, lastName, email, username, password }),
+      });
+
+      if (res.status === 200 || res.status === 201) {
+        const { createdUser, encodedToken } = await res.json();
+        localStorage.setItem(
+          "signup",
+          JSON.stringify({ token: encodedToken, user: createdUser })
+        );
+        setCurrentUser(createdUser);
+        setToken(encodedToken);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }; 
+
   console.log(token, currentUser);
 
   return (
@@ -51,6 +74,7 @@ export const AuthHandler = ({ children }) => {
         setCurrentUser,
         handleLogin,
         handleLogout,
+        handleSignUp
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Avatar from "react-avatar";
 
 import { SocialDataContext } from "../../contexts/dataContext";
@@ -20,28 +20,28 @@ import { SortPosts } from "../sort-posts/sortPosts";
 import { BookmarkContext } from "../../contexts/bookmarksContext";
 
 export const PostsPage = ({ postsOnFeed }) => {
-  const { handleCreatePosts, deletePosts, getSingleUser, dispatch, state } =
+  const { handleCreatePosts, deletePosts, getSingleUser, state } =
     useContext(SocialDataContext);
 
   const { currentUser } = useContext(AuthContext);
 
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState({
+    content: "",
+    image: null
+  });
 
   const [postUpdate, setPostUpdate] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const getFormValue = (e) => {
-    setFormData(e.target.value);
-  };
-
+ 
   const createPost = () => {
-    if (formData !== "") {
+    if (formData.content !== "" || formData?.image?.length > 0) {
       handleCreatePosts(formData);
     }
 
-    setFormData("");
+    setFormData({...formData, content: "", image: null});
   };
 
   const checkIndividualUser = (userId) => {
@@ -81,12 +81,14 @@ export const PostsPage = ({ postsOnFeed }) => {
     handleUnfollowUser(userId);
   };
 
+
+
   return (
     <>
       <div className="post-area">
         <CreatePosts
           formData={formData}
-          getFormValue={getFormValue}
+          setFormData={setFormData}
           createPost={createPost}
           showCreatePost={location?.pathname === "/" ? true : false}
         />

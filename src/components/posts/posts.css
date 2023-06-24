@@ -145,6 +145,19 @@ margin-top: 10px;
     cursor: pointer;
 }
 
+#file-input {
+    display: none;
+}
+
+.image-upload-display {
+    width: 200px;
+}
+
+.image-close {
+    position: absolute;
+    font-size: 20px;
+}
+
 
 
 /* Sort Posts */
@@ -167,7 +180,7 @@ margin-top: 10px;
 
 .sort-action-btn {
     cursor: pointer;
-    box-shadow: 1px 2px 5px rgba(107, 107, 107, 0.7);
+    box-shadow: 0px 0px 5px rgba(107, 107, 107, 0.7);
     padding: 5px;
     color: azure;
     border-radius: 10px;

@@ -74,7 +74,8 @@ export const SocialDetailsHandler = ({ children }) => {
             authorization: token,
           },
           body: JSON.stringify({postData: {
-            content: postData
+            content: postData?.content,
+            image: postData?.image
           }})
         });
 
@@ -87,6 +88,8 @@ export const SocialDetailsHandler = ({ children }) => {
       console.log(error.message);
     }
   }
+
+  console.log(state?.posts);
 
 
   const deletePosts = async(postId) => {
@@ -194,9 +197,16 @@ export const SocialDetailsHandler = ({ children }) => {
 
        setCurrentUser({...user, following: [...currentUser.following, followUser]})
 
-        // console.log(followUser)
+       const newListOfUsers = state?.users.map((userOriginal) => userOriginal._id === followUser?._id ? followUser : userOriginal);
 
-        dispatch({ type: "remove-suggested-user", userId });
+       console.log("follow list: ", newListOfUsers)
+
+       dispatch({ type: "initialize-users", users: newListOfUsers 
+      });
+
+      dispatch({type: "individual-user-profile", profile: followUser});
+
+      dispatch({ type: "remove-suggested-user", userId });
       }
     } catch (error) {
       console.log(error.message);
@@ -216,9 +226,19 @@ export const SocialDetailsHandler = ({ children }) => {
           },
         });
 
-        const { user } = await response.json();
+        const { user, followUser } = await response.json();
 
         setCurrentUser(user);
+
+        const newListOfUsers = state?.users.map((userOriginal) => userOriginal._id === followUser?._id ? followUser : userOriginal);
+
+       console.log("unfollow list: ", newListOfUsers)
+
+       dispatch({ type: "initialize-users", users: newListOfUsers 
+      });
+
+      dispatch({type: "individual-user-profile", profile: followUser});
+
       }
     } catch (error) {
       console.log(error.message)
