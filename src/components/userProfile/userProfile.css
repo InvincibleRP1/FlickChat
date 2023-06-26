@@ -133,10 +133,10 @@ textarea {
 /* Avatars and Profile Picture */
 
 .close-edit-field {
-    position: absolute;
+    margin-right: -25rem;
     font-size: 30px;
     font-weight: bold;
-    right: 20px;
+    
 }
 .profile-picture-section {
     position: relative;
