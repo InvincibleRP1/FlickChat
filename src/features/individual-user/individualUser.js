@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom"
 import { SocialDataContext } from "../../contexts/dataContext";
 import { TopNavigation } from "../../components/navbar/navbar";
 import { UserSuggestion } from "../../components/userSuggestion/userSuggestion";

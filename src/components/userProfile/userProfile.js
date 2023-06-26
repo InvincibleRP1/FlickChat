@@ -45,7 +45,10 @@ export const UserProfile = ({ user }) => {
 
         
       <div className="profile-area">
-      <EditProfileModal formData={formData} showModal={showModal} setShowModal={setShowModal} setFormData={setFormData}/>
+        
+      <EditProfileModal formData={formData} showModal={showModal} setShowModal={setShowModal} setFormData={setFormData}
+      user={user}
+      />
 
       <div className="user-details-section">
       <Avatar

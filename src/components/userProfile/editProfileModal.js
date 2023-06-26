@@ -1,26 +1,92 @@
 import { useContext } from "react";
-import { useState } from "react";
 import { SocialDataContext } from "../../contexts/dataContext";
+import { useState } from "react";
+import { AvatarModal } from "./avatarModal";
+import Avatar from "react-avatar";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faClose, faImage } from "@fortawesome/free-solid-svg-icons";
 
 export const EditProfileModal = ({
   formData,
   showModal,
   setShowModal,
   setFormData,
+  user,
 }) => {
   const { editUserProfile } = useContext(SocialDataContext);
 
+  const [showAvatarModal, setAvatarModal] = useState(false);
+
+  const [profilePicSelected, setProfilePic] = useState("");
+
   const handleSavingEditedData = () => {
-    editUserProfile(formData);
+    
+    if(profilePicSelected)
+    {
+      editUserProfile({...formData, avatar: profilePicSelected });
+    }
+    else {
+      editUserProfile(formData);
+    }
     setShowModal((prevVal) => !prevVal);
   };
 
+  const handleAvatarModal = () => {
+    setShowModal((prevVal) => !prevVal);
+    setAvatarModal((prev) => !prev);
+  };
+
+  const handleProfilePictureUpload = (e) => {
+    setProfilePic(URL.createObjectURL(e.target.files[0]));
+  }
+
   return (
     <div>
+      {showAvatarModal && (
+        <AvatarModal
+          showAvatarModal={showAvatarModal}
+          setShowAvatarModal={setAvatarModal}
+          user={user}
+        />
+      )}
+
       {showModal && (
         <div className="edit-form-modal">
+
+          <FontAwesomeIcon icon={faClose} className="close-edit-field"
+          onClick={() => setShowModal((prevVal) => !prevVal)}
+          />
+
+          <div className="profile-picture-section">
+            <Avatar
+              round={true}
+              src={profilePicSelected ? profilePicSelected : user?.avatar}
+              name={user?.firstName}
+              size="120"
+              className="edit-profile-pic"
+            />
+
+            <label for="profile-image">
+            <FontAwesomeIcon icon={faImage} className="profile-action-icon"
+            />
+            </label>
+            
+            <input
+              type="file"
+              name="image"
+              id="profile-image"
+              onChange={handleProfilePictureUpload}
+              value={""}
+            />
+           
+            <button className="action-btn" onClick={handleAvatarModal}>
+              Change Avatar
+            </button>
+          </div>
           <div className="names">
-            <label htmlFor="" className="name-inputs">
+            <label className="name-inputs">
               First Name
               <input
                 type="text"
@@ -34,8 +100,7 @@ export const EditProfileModal = ({
                 }
               />
             </label>
-
-            <label htmlFor="" className="name-inputs">
+            <label className="name-inputs">
               Lastname
               <input
                 type="text"
@@ -51,7 +116,7 @@ export const EditProfileModal = ({
             </label>
           </div>
 
-          <label htmlFor="" className="bio">
+          <label className="bio">
             Bio
             <textarea
               id=""
@@ -68,7 +133,7 @@ export const EditProfileModal = ({
           <br />
 
           <div className="user-links">
-            <label htmlFor="">Link</label>
+            <label>Link</label>
             <input
               type="text"
               value={formData.link}
@@ -80,13 +145,8 @@ export const EditProfileModal = ({
           </div>
 
           <div className="form-action-btns">
-            <button onClick={handleSavingEditedData}
-            className="action-btn"
-            >Save</button>
-            <br />
-
-            <button onClick={() => setShowModal((prevVal) => !prevVal)} className="action-btn close-btn">
-              Close
+            <button onClick={handleSavingEditedData} className="action-btn">
+              Save
             </button>
           </div>
         </div>

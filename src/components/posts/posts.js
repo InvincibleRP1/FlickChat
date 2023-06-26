@@ -18,6 +18,7 @@ import { CreatePosts } from "./createPosts";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SortPosts } from "../sort-posts/sortPosts";
 import { BookmarkContext } from "../../contexts/bookmarksContext";
+import { PostModal } from "../postModal/postModal";
 
 export const PostsPage = ({ postsOnFeed }) => {
   const { handleCreatePosts, deletePosts, getSingleUser, state } =
@@ -25,42 +26,33 @@ export const PostsPage = ({ postsOnFeed }) => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const [formData, setFormData] = useState({
-    content: "",
-    image: null
-  });
+  const { formData, setFormData, editFormData, setEditFormData } = useContext(SocialDataContext);
 
   const [postUpdate, setPostUpdate] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [currentPostId, setCurrentPostId] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
 
- 
   const createPost = () => {
     if (formData.content !== "" || formData?.image?.length > 0) {
       handleCreatePosts(formData);
     }
 
-    setFormData({...formData, content: "", image: null});
+    setFormData({ ...formData, content: "", image: null });
   };
 
   const checkIndividualUser = (userId) => {
     getSingleUser(userId);
     navigate(`/profile/${userId}`);
-  }
+  };
 
-  const {
-    handleLikes,
-    handleDislikes,
-    postsLikedByUser,
-    handleUnfollowUser
-  } = useContext(SocialDataContext);
+  const { handleLikes, handleDislikes, postsLikedByUser, handleUnfollowUser } =
+    useContext(SocialDataContext);
 
-  const { 
-    addToBookmarks,
-    postPresentInBookmarks,
-    removeFromBookmarks
-  } = useContext(BookmarkContext);
+  const { addToBookmarks, postPresentInBookmarks, removeFromBookmarks } =
+    useContext(BookmarkContext);
 
   const likePost = (postId) => {
     handleLikes(postId);
@@ -81,6 +73,19 @@ export const PostsPage = ({ postsOnFeed }) => {
     handleUnfollowUser(userId);
   };
 
+  // Edit Post
+
+  const handleEditPost = (post) => {
+    setShowEditModal((prev) => !prev);
+    setCurrentPostId(post._id);
+
+    setEditFormData((formVal) => ({
+      ...formVal,
+      content: post?.content,
+      image: post?.image,
+    }));
+    setPostUpdate("")
+  };
 
 
   return (
@@ -93,13 +98,25 @@ export const PostsPage = ({ postsOnFeed }) => {
           showCreatePost={location?.pathname === "/" ? true : false}
         />
 
-        <div style={{display: location.pathname === "/" || location.pathname === "/explore" ? "" : "none"}}>
-        <SortPosts />
-        {state?.sortValue && <p
-        className="sort-post-denote"
-        >Showing {state?.sortValue} posts</p>}
+        <div
+          style={{
+            display:
+              location.pathname === "/" || location.pathname === "/explore"
+                ? ""
+                : "none",
+          }}
+        >
+          <SortPosts />
+          {state?.sortValue && (
+            <p className="sort-post-denote">Showing {state?.sortValue} posts</p>
+          )}
         </div>
-        
+
+        <PostModal
+          showPostModal={showEditModal}
+          setShowPostModal={setShowEditModal}
+          postId={currentPostId}
+        />
 
         {postsOnFeed.map((post) => {
           const {
@@ -134,7 +151,12 @@ export const PostsPage = ({ postsOnFeed }) => {
 
                   {postUpdate === _id && currentUser.username === username ? (
                     <div className="post-update-section update-details">
-                      <p className="update-options">Edit</p>
+                      <p
+                        className="update-options"
+                        onClick={() => handleEditPost(post)}
+                      >
+                        Edit
+                      </p>
                       <hr />
                       <p
                         className="update-options"
@@ -157,10 +179,10 @@ export const PostsPage = ({ postsOnFeed }) => {
                     ""
                   )}
 
-                  <div className="post-creator-details"
-                  onClick={() => checkIndividualUser(userFound._id)}
+                  <div
+                    className="post-creator-details"
+                    onClick={() => checkIndividualUser(userFound._id)}
                   >
-
                     <Avatar
                       name={fullname}
                       src={userFound?.avatar}
@@ -169,7 +191,9 @@ export const PostsPage = ({ postsOnFeed }) => {
                     />
 
                     <p className="user-name">
-                      {userFound?.firstName.concat(" ").concat(userFound?.lastName)}
+                      {userFound?.firstName
+                        .concat(" ")
+                        .concat(userFound?.lastName)}
                       <br />
                       <span>@{username}</span>
                     </p>

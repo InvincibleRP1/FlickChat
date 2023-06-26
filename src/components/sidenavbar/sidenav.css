@@ -29,3 +29,19 @@
     background-color: rgb(184, 29, 29);
     color: white;
   }
+
+  .nav-icon {
+    margin-left: 5px;
+  }
+
+  .add-post {
+    background-color: rgb(77 137 48);
+    display: inline-block;
+    font-weight: bold;
+    font-size: 20px; 
+    color: white;
+    padding: 10px;
+    border-radius: 100px;
+    width: 20px;
+    margin: 0px auto;
+  }

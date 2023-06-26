@@ -2,7 +2,8 @@ import {
   createContext,
   useContext,
   useEffect,
-  useReducer
+  useReducer,
+  useState
 } from "react";
 
 import { initialState, socialReducer } from "../reducer/socialDetailsReducer";
@@ -12,6 +13,18 @@ export const SocialDataContext = createContext();
 
 export const SocialDetailsHandler = ({ children }) => {
   const [state, dispatch] = useReducer(socialReducer, initialState);
+
+  const [formData, setFormData] = useState({
+    content: "",
+    image: null
+  });
+
+  const [editFormData, setEditFormData] = useState({
+    content: "",
+    image: null
+  });
+
+  
 
   const { token, currentUser, setCurrentUser } = useContext(AuthContext);
 
@@ -89,8 +102,6 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   }
 
-  console.log(state?.posts);
-
 
   const deletePosts = async(postId) => {
     try {
@@ -127,6 +138,27 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   }
   
+  const editPost = async(postId, postData) => {
+    try {
+      const response = await fetch(`/api/posts/edit/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: token,
+        },
+        body: JSON.stringify({postData: {
+          content: postData?.content,
+          image: postData?.image
+        }})
+      });
+
+      const { posts } = await response.json();
+
+      dispatch({ type: "initialize-posts", posts: posts });
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   // Likes - Dislikes
 
@@ -276,8 +308,10 @@ export const SocialDetailsHandler = ({ children }) => {
       value={{
         state,
         dispatch,
+
         handleCreatePosts,
         deletePosts,
+        editPost,
         getIndividualPosts,
         postsAfterSorting,
         
@@ -290,7 +324,13 @@ export const SocialDetailsHandler = ({ children }) => {
         handleUnfollowUser,
 
         getSingleUser,
-        editUserProfile
+        editUserProfile,
+
+        formData,
+        setFormData,
+
+        editFormData,
+        setEditFormData
       }}
     >
       {children}

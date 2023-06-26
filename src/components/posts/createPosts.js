@@ -13,7 +13,7 @@ export const CreatePosts = ({
   formData,
   setFormData,
   createPost,
-  showCreatePost,
+  showCreatePost
 }) => {
   const { currentUser } = useContext(AuthContext);
 
@@ -24,6 +24,8 @@ export const CreatePosts = ({
     setImageSelected(false);
   }
 
+
+
   const handleImageUpload = (e) => {
     setFormData({
       ...formData,
@@ -32,6 +34,15 @@ export const CreatePosts = ({
 
     setImageSelected(true);
   };
+
+  const handleImageClose = () => {
+    setFormData({
+      ...formData,
+      image: null
+    });
+
+    setImageSelected(false);
+  }
 
   return (
     <div>
@@ -80,6 +91,8 @@ export const CreatePosts = ({
             <button className="post-create-btn" onClick={handleCreatePost}>
               Post
             </button>
+            
+          
           </div>
 
           <div style={{ display: imageSelected ? "" : "none" }}>
@@ -91,7 +104,7 @@ export const CreatePosts = ({
 
             <FontAwesomeIcon
               className="close-btn image-close"
-              onClick={() => setImageSelected(false)}
+              onClick={handleImageClose}
               icon={faClose}
             />
           </div>

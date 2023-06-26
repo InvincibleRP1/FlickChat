@@ -56,17 +56,17 @@
 /* Edit Form Modal */
 
 .edit-form-modal {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
-    left: 15%;
-    top: 8%;
+    left: 32%;
+    top: 10%;
     background-color: rgb(164, 145, 121);
     color: black;
     font-weight: 600;
     border-radius: 20px;
     box-shadow: 2px 3px 5px black;
-    padding: 20px;
+    padding: 17px;
     width: 30rem;
 }
 
@@ -129,4 +129,49 @@ textarea {
     color: white;
 }
 
+
+/* Avatars and Profile Picture */
+
+.close-edit-field {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    right: 20px;
+}
+.profile-picture-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-action-icon {
+    color: rgb(30, 47, 73);
+    position: absolute;
+    bottom: 2rem;
+    right: 12em;
+}
+
+#profile-image {
+    display: none;
+}
+
+.avatar-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.close-icon {
+    float: right;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.avatar-item:hover {
+    border: 5px solid rgb(145, 76, 69);
+    border-radius: 100px;
+}
 
