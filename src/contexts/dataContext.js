@@ -296,7 +296,7 @@ export const SocialDetailsHandler = ({ children }) => {
 
   useEffect(() => {
     handleAPI();
-  }, [currentUser?.following, currentUser?.followers, currentUser?.avatar]);
+  }, [currentUser?.following, currentUser?.followers]);
 
   // console.log("Posts: ", state?.posts);
   // console.log("current user details: ",currentUser);
