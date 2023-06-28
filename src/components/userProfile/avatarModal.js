@@ -10,7 +10,7 @@ import { SocialDataContext } from "../../contexts/dataContext";
 
 export const AvatarModal = ({showAvatarModal, setShowAvatarModal, user}) => {
 
-    const { dispatch, state } = useContext(SocialDataContext);
+    const { editUserProfile, formData } = useContext(SocialDataContext);
 
     const { currentUser, setCurrentUser } = useContext(AuthContext);
 
@@ -29,14 +29,8 @@ export const AvatarModal = ({showAvatarModal, setShowAvatarModal, user}) => {
 ];
 
 const handleAvatarChange = (avatarImg) => {
-  const newUsers = state?.users?.map((existingUser) => existingUser._id === user._id ? {...user, avatar: avatarImg} : existingUser);
 
-  const updatedUser = newUsers?.find((existingUser) => existingUser._id === currentUser._id);
-
-  console.log(updatedUser);
-  setCurrentUser(updatedUser);
-
-  dispatch({ type: "initialize-users", users: newUsers });
+  editUserProfile({...formData, avatar: avatarImg });
 
   setShowAvatarModal(prev => !prev);
 }

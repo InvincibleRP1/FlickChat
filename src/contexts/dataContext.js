@@ -292,16 +292,12 @@ export const SocialDetailsHandler = ({ children }) => {
     return duplicatedPosts;
   };
 
-  // const postsOnDisplay = postsAfterSorting(postsOnUserFeed);
-
+  
   useEffect(() => {
     handleAPI();
   }, [currentUser?.following, currentUser?.followers]);
 
-  // console.log("Posts: ", state?.posts);
-  // console.log("current user details: ",currentUser);
-
-  // console.log(state?.userPosts, "user posts");
+ 
 
   return (
     <SocialDataContext.Provider
