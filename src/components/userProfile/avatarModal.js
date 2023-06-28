@@ -33,9 +33,12 @@ const handleAvatarChange = (avatarImg) => {
 
   const updatedUser = newUsers?.find((existingUser) => existingUser._id === currentUser._id);
   
-  setCurrentUser(updatedUser);
 
+  
   dispatch({ type: "initialize-users", users: newUsers });
+
+  console.log(updatedUser);
+  setCurrentUser(updatedUser);
 
   setShowAvatarModal(prev => !prev);
 }
