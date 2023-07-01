@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faFaceSmile, faClose } from "@fortawesome/free-solid-svg-icons";
 
 import { AuthContext } from "../../contexts/authContext";
+import { SocialDataContext } from "../../contexts/dataContext";
+
+import EmojiPicker from "emoji-picker-react";
 
 export const CreatePosts = ({
   formData,
@@ -16,15 +19,18 @@ export const CreatePosts = ({
   showCreatePost
 }) => {
   const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(SocialDataContext);
 
   const [imageSelected, setImageSelected] = useState(false);
+
+  const [emojiSelected, setEmojiSelected] = useState(false);
 
   const handleCreatePost = () => {
     createPost();
     setImageSelected(false);
+    setEmojiSelected(false);
+    dispatch({ type: "post-sort-method", value: "latest" });
   }
-
-
 
   const handleImageUpload = (e) => {
     setFormData({
@@ -86,7 +92,15 @@ export const CreatePosts = ({
               value={""}
             />
 
-            <FontAwesomeIcon icon={faFaceSmile} className="post-info" />
+            <FontAwesomeIcon icon={faFaceSmile} className="post-info" 
+            onClick={() => setEmojiSelected(prevVal => !prevVal)}
+            />
+
+            {emojiSelected && 
+            <div className="emoji-section">
+              <EmojiPicker onEmojiClick={({emoji}) =>  setFormData((formVal) => ({...formVal, content: formVal?.content.concat(emoji)}))}/>
+            </div>
+            }
 
             <button className="post-create-btn" onClick={handleCreatePost}>
               Post

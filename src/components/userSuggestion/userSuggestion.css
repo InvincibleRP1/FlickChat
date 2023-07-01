@@ -55,3 +55,7 @@
     border: none;
     outline: none;
 }
+
+.user-list-info {
+    text-align: center;
+}

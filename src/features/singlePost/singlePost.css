@@ -1,0 +1,83 @@
+.comments-section {
+    box-shadow: 2px 3px 10px rgba(0,0,0,0.7);
+    margin-top: -1rem;
+    margin-left: 27rem;
+    width: 45%;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-area {
+    width: 60%;
+    margin-left: 10px;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: azure;
+    outline: none;
+    font-size: 17px;
+    padding: 4px;
+}
+
+.comment-details {
+    margin-top: 10px;
+    border-top:  3px solid grey;
+}
+
+.user-comment {
+    padding: 12px;
+    display: flex;
+    gap: 1rem;
+}
+
+.comment {
+    color: black;
+    background-color: rgb(190, 229, 244);
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.add-comment {
+    display: flex;
+    gap: 1rem;
+}
+
+.comment-btn {
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #daffef;
+}
+
+.comment-username {
+    color: grey;
+}
+
+/* Edit Comments */
+
+.update-comment {
+    color: black;
+    float: right;
+}
+
+.comment-changes {
+    position: absolute;
+    float: right;  
+    background-color: #3a3d67;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: azure;
+}
+
+.edit-comment-form {
+    padding: 5px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+}

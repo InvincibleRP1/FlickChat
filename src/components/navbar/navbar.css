@@ -7,11 +7,11 @@
     height: 8vh;
     z-index: 10;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     /* gap: 50rem; */
     align-items: center;
     padding: 3px;
-    background-color: #5f5443;
+    background-color: #463f35;
     color: azure;
     margin: -8px -8px;
 }
@@ -24,6 +24,11 @@
 
 .nav-details {
     display: flex;
+}
+
+.current-user {
+    padding: 40px;
+    font-weight: bold;
 }
 
 

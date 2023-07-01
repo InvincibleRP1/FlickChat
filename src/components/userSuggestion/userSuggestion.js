@@ -78,7 +78,7 @@ export const UserSuggestion = () => {
             );
           })}
 
-          {usersOnList.length === 0 && <p>No such user found!</p>}
+          {usersOnList.length === 0 && <p className="user-list-info">No users found!</p>}
         </ul>
       </div>
     </>

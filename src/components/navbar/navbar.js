@@ -1,14 +1,11 @@
 import { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 
-import { NavLink } from "react-router-dom";
 import "../navbar/navbar.css";
 import { AuthContext } from "../../contexts/authContext";
 
 
 export const TopNavigation = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, token } = useContext(AuthContext);
 
   return (
     <>
@@ -19,13 +16,11 @@ export const TopNavigation = () => {
           className="logo-img"
         />
 
-      <NavLink to="/test">API Test</NavLink>
-
         <div className="nav-details">
 
-          <FontAwesomeIcon icon={faToggleOn} className="display-mode" />
+          {/* <FontAwesomeIcon icon={faToggleOn} className="display-mode" /> */}
           
-          <p>Hi {currentUser?.firstName}</p>
+          {token && <p className="current-user">Hi, {currentUser?.firstName}</p>}
         </div>
 
         

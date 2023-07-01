@@ -3,9 +3,10 @@ import {
   useContext,
   useEffect,
   useReducer,
-  useState
+  useState,
 } from "react";
 
+import { toast } from "react-toastify";
 import { initialState, socialReducer } from "../reducer/socialDetailsReducer";
 import { AuthContext } from "./authContext";
 
@@ -16,149 +17,165 @@ export const SocialDetailsHandler = ({ children }) => {
 
   const [formData, setFormData] = useState({
     content: "",
-    image: null
+    image: null,
   });
 
   const [editFormData, setEditFormData] = useState({
     content: "",
-    image: null
+    image: null,
   });
 
-  
+  const [isLoading, setIsLoading] = useState(false);
 
   const { token, currentUser, setCurrentUser } = useContext(AuthContext);
 
   const handleAPI = async () => {
+    setIsLoading(true);
     const response = await fetch("/api/posts");
     const { posts } = await response.json();
 
-    dispatch({ type: "initialize-posts", posts: posts });
+    if (response.status === 200 || response.status === 201) {
+      dispatch({ type: "initialize-posts", posts: posts });
+    }
 
     const res = await fetch("/api/users");
     const { users } = await res.json();
 
-    dispatch({ type: "initialize-users", users: users });
+    if (res.status === 200 || res.status === 201) {
+      dispatch({ type: "initialize-users", users: users });
+      setIsLoading(false);
+    }
   };
 
   // Users
 
-  const getSingleUser = async(userId) => {
+  const getSingleUser = async (userId) => {
     try {
       const response = await fetch(`/api/users/${userId}`);
 
       const { user } = await response.json();
 
-     dispatch({type: "individual-user-profile", profile: user});
-
+      dispatch({ type: "individual-user-profile", profile: user });
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
-  const editUserProfile = async(dataByUser) => {
+  const editUserProfile = async (dataByUser) => {
     try {
-      const response = await fetch('/api/users/edit', {
+      const response = await fetch("/api/users/edit", {
         method: "POST",
         headers: {
           authorization: token,
         },
-        body: JSON.stringify({userData: dataByUser})
+        body: JSON.stringify({ userData: dataByUser }),
       });
 
       const { user } = await response.json();
-      
+
       setCurrentUser(user);
 
+      toast.success("Profile Edited");
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   // Posts
 
-  const handleCreatePosts = async(postData) => {
-
+  const handleCreatePosts = async (postData) => {
     try {
-      if(token)
-      {
+      setIsLoading(true);
+      if (token) {
         const response = await fetch("/api/posts", {
           method: "POST",
           headers: {
             authorization: token,
           },
-          body: JSON.stringify({postData: {
-            content: postData?.content,
-            image: postData?.image
-          }})
+          body: JSON.stringify({
+            postData: {
+              content: postData?.content,
+              image: postData?.image,
+            },
+          }),
         });
 
-       const { posts } = await response.json();
+        const { posts } = await response.json();
 
-       dispatch({ type: "initialize-posts", posts: posts });
+        if (response.status === 200 || response.status === 201)
 
+        {
+          dispatch({ type: "initialize-posts", posts: posts });
+
+          setIsLoading(false);
+        }
+
+       
+
+        toast.success("Post Created!");
       }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
-
-  const deletePosts = async(postId) => {
+  const deletePosts = async (postId) => {
     try {
-      if(token)
-      {
+      if (token) {
         const response = await fetch(`/api/posts/${postId}`, {
           method: "DELETE",
-            headers: {
-              authorization: token,
-            }
-        })
-  
-        const { posts } = await response.json();
-  
-        dispatch({ type: "initialize-posts", posts: posts });
-      }
-     
+          headers: {
+            authorization: token,
+          },
+        });
 
+        const { posts } = await response.json();
+
+        dispatch({ type: "initialize-posts", posts: posts });
+
+        toast.error("Post Deleted");
+      }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
-  const getIndividualPosts = async(username) => {
+  const getIndividualPosts = async (username) => {
     try {
       const response = await fetch(`/api/posts/user/${username}`);
 
       const { posts } = await response.json();
 
-      dispatch({type: "individual-user-posts", posts});
-
+      dispatch({ type: "individual-user-posts", posts });
     } catch (error) {
       console.log(error.message);
     }
-  }
-  
-  const editPost = async(postId, postData) => {
+  };
+
+  const editPost = async (postId, postData) => {
     try {
       const response = await fetch(`/api/posts/edit/${postId}`, {
         method: "POST",
         headers: {
           authorization: token,
         },
-        body: JSON.stringify({postData: {
-          content: postData?.content,
-          image: postData?.image
-        }})
+        body: JSON.stringify({
+          postData: {
+            content: postData?.content,
+            image: postData?.image,
+          },
+        }),
       });
 
       const { posts } = await response.json();
 
       dispatch({ type: "initialize-posts", posts: posts });
 
+      toast.success("Post Updated");
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   // Likes - Dislikes
 
@@ -212,7 +229,6 @@ export const SocialDetailsHandler = ({ children }) => {
     }
   };
 
-  
   // Follow / Unfollow
 
   const handleFollowUser = async (userId) => {
@@ -227,30 +243,32 @@ export const SocialDetailsHandler = ({ children }) => {
 
         const { user, followUser } = await response.json();
 
-       setCurrentUser({...user, following: [...currentUser.following, followUser]})
+        setCurrentUser({
+          ...user,
+          following: [...currentUser.following, followUser],
+        });
 
-       const newListOfUsers = state?.users.map((userOriginal) => userOriginal._id === followUser?._id ? followUser : userOriginal);
+        const newListOfUsers = state?.users.map((userOriginal) =>
+          userOriginal._id === followUser?._id ? followUser : userOriginal
+        );
 
-       console.log("follow list: ", newListOfUsers)
+        dispatch({ type: "initialize-users", users: newListOfUsers });
 
-       dispatch({ type: "initialize-users", users: newListOfUsers 
-      });
+        dispatch({ type: "individual-user-profile", profile: followUser });
 
-      dispatch({type: "individual-user-profile", profile: followUser});
+        dispatch({ type: "remove-suggested-user", userId });
 
-      dispatch({ type: "remove-suggested-user", userId });
+        toast.success(`Followed ${followUser.firstName}`);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
-
-  const handleUnfollowUser = async(userId) => {
+  const handleUnfollowUser = async (userId) => {
     console.log(userId);
     try {
-      if(token)
-      {
+      if (token) {
         const response = await fetch(`/api/users/unfollow/${userId}`, {
           method: "POST",
           headers: {
@@ -262,20 +280,20 @@ export const SocialDetailsHandler = ({ children }) => {
 
         setCurrentUser(user);
 
-        const newListOfUsers = state?.users.map((userOriginal) => userOriginal._id === followUser?._id ? followUser : userOriginal);
+        const newListOfUsers = state?.users.map((userOriginal) =>
+          userOriginal._id === followUser?._id ? followUser : userOriginal
+        );
 
-       console.log("unfollow list: ", newListOfUsers)
+        dispatch({ type: "initialize-users", users: newListOfUsers });
 
-       dispatch({ type: "initialize-users", users: newListOfUsers 
-      });
+        dispatch({ type: "individual-user-profile", profile: followUser });
 
-      dispatch({type: "individual-user-profile", profile: followUser});
-
+        toast.info(`Unfollowed ${followUser.firstName}`);
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   // Sort Posts
   const postsAfterSorting = (posts) => {
@@ -286,18 +304,17 @@ export const SocialDetailsHandler = ({ children }) => {
         (a, b) => b.likes.likeCount - a.likes.likeCount
       ));
     } else if (state?.sortValue === "latest") {
-      return (duplicatedPosts = [...posts].sort((a, b) => b.createdAt - a.createdAt)).reverse();
+      return (duplicatedPosts = [...posts].sort(
+        (a, b) => b.createdAt - a.createdAt
+      )).reverse();
     }
 
     return duplicatedPosts;
   };
 
-  
   useEffect(() => {
     handleAPI();
   }, [currentUser?.following, currentUser?.followers]);
-
- 
 
   return (
     <SocialDataContext.Provider
@@ -310,11 +327,10 @@ export const SocialDetailsHandler = ({ children }) => {
         editPost,
         getIndividualPosts,
         postsAfterSorting,
-        
+
         handleLikes,
         handleDislikes,
         postsLikedByUser,
-
 
         handleFollowUser,
         handleUnfollowUser,
@@ -326,7 +342,9 @@ export const SocialDetailsHandler = ({ children }) => {
         setFormData,
 
         editFormData,
-        setEditFormData
+        setEditFormData,
+
+        isLoading
       }}
     >
       {children}

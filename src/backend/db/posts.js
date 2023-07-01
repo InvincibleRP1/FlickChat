@@ -18,9 +18,21 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        username: "moviebuffrahul",
+        text: "Ryan and other actors were outstanding in it!"
+      },
+      {
+        _id: uuid(),
+        username: "cineprism",
+        text: "Top notch cinematography!"
+      }
+    ],
     fullname: "The Cinefanatic",
     username: "cinefanatic",
-    createdAt: formatDate(),
+    createdAt: "2023-05-22T10:38:12+05:30",
     updatedAt: formatDate(),
   },
 
@@ -35,9 +47,10 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     fullname: "Rahul Pandey",
     username: "moviebuffrahul",
-    createdAt: formatDate(),
+    createdAt: "2023-06-12T10:38:12+05:30",
     updatedAt: formatDate(),
   },
 
@@ -52,9 +65,10 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     fullname: "The Cineprism",
     username: "cineprism",
-    createdAt: formatDate(),
+    createdAt: "2022-07-29T10:38:12+05:30",
     updatedAt: formatDate(),
   },
 
@@ -67,9 +81,16 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        username: "harrypaaji",
+        text: "Even I am excited to watch it!"
+      }
+    ],
     fullname: "Barry Cooper",
     username: "theflash",
-    createdAt: formatDate(),
+    createdAt: "2023-04-05T10:38:12+05:30",
     updatedAt: formatDate(),
   },
 
@@ -85,9 +106,21 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [
+      {
+        _id: uuid(),
+        username: "cineprism",
+        text: "One of the greatest films of Indian Cinema"
+      },
+      {
+        _id: uuid(),
+        username: "moviebuffrahul",
+        text: "I agree with Cineprism"
+      }
+    ],
     fullname: "Micheal Smith",
     username: "dazzlingsmiths",
-    createdAt: formatDate(),
+    createdAt: "2023-07-02T10:38:12+05:30",
     updatedAt: formatDate(),
   },
 ];

@@ -93,18 +93,17 @@
     border-radius: 8px;
 }
 
-/* .avatar-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 80px;
-} */
-
 .post-avatar {
 margin-top: 10px;
 }
 
 .post-create-btn {
     float: right;
+}
+
+#post-time {
+    color: gray;
+    font-size: 14px;
 }
 
 .post-update-section {
@@ -189,4 +188,8 @@ margin-top: 10px;
 
 .sort-action-btn > span {
     margin: 0.4rem;
+}
+
+.emoji-section {
+    position: absolute;
 }

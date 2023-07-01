@@ -17,6 +17,14 @@ body {
    font-family: 'DM Sans', sans-serif;
 }
 
+::-webkit-scrollbar {
+   width: 5px;
+ }
+ 
+ ::-webkit-scrollbar-thumb {
+   background: hsl(58, 27%, 59%);
+ }
+
 .page-heading {
    color: azure;
    text-align: center;

@@ -7,6 +7,7 @@ import { SideNav } from "../../components/sidenavbar/sidenav";
 import { UserSuggestion } from "../../components/userSuggestion/userSuggestion";
 import { PostsPage } from "../../components/posts/posts";
 import { AuthContext } from "../../contexts/authContext";
+import { FooterSection } from "../../components/footer/footer";
 
 export const UserFeedPage = () => {
   const { state, postsAfterSorting } = useContext(SocialDataContext);
@@ -36,9 +37,11 @@ export const UserFeedPage = () => {
         <SideNav />
 
         <PostsPage postsOnFeed={postsOnDisplay} />
-
+        
         <UserSuggestion />
+        
       </div>
+      <FooterSection />
     </>
   );
 };

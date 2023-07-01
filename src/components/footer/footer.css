@@ -1,0 +1,35 @@
+.footer-area {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    z-index: 10;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: #463f35;
+}
+
+.footer-desc {
+    display: flex;
+    flex-direction: column;
+    color: azure;
+}
+
+#footer-details {
+    color: #d7a671;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-gap: 1.5rem;
+    margin-right: 30px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.social-links-names {
+    font-size: 25px;
+    color: aliceblue;
+}

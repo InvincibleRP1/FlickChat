@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faCompass, faBookmark, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faCompass, faBookmark, faUser, faSignOut, faSignIn } from "@fortawesome/free-solid-svg-icons";
 
 export const SideNav = () => {
   const { token, handleLogout } = useContext(AuthContext);
@@ -48,12 +48,16 @@ export const SideNav = () => {
         </NavLink>
 
         {token ? (
-          <button className="sidenav-btn" onClick={handleLogout}>
-            Logout
-          </button>
+          <div className="sidenav-btn" onClick={handleLogout}>
+          <FontAwesomeIcon
+          icon={faSignOut}
+          />
+          <span>Log Out</span>
+          </div>
+          
         ) : (
           <NavLink className="sidenav-btn" to="/login">
-            Login
+            <FontAwesomeIcon icon={faSignIn}/>
           </NavLink>
         )}
       </div>

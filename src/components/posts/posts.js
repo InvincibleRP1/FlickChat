@@ -19,6 +19,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SortPosts } from "../sort-posts/sortPosts";
 import { BookmarkContext } from "../../contexts/bookmarksContext";
 import { PostModal } from "../postModal/postModal";
+import { Loader } from "../loader/loader";
+import { toast } from "react-toastify";
 
 export const PostsPage = ({ postsOnFeed }) => {
   const { handleCreatePosts, deletePosts, getSingleUser, state } =
@@ -26,7 +28,8 @@ export const PostsPage = ({ postsOnFeed }) => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const { formData, setFormData, editFormData, setEditFormData } = useContext(SocialDataContext);
+  const { formData, setFormData, editFormData, setEditFormData } =
+    useContext(SocialDataContext);
 
   const [postUpdate, setPostUpdate] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
@@ -48,7 +51,7 @@ export const PostsPage = ({ postsOnFeed }) => {
     navigate(`/profile/${userId}`);
   };
 
-  const { handleLikes, handleDislikes, postsLikedByUser, handleUnfollowUser } =
+  const { handleLikes, handleDislikes, postsLikedByUser, handleUnfollowUser, isLoading } =
     useContext(SocialDataContext);
 
   const { addToBookmarks, postPresentInBookmarks, removeFromBookmarks } =
@@ -84,9 +87,14 @@ export const PostsPage = ({ postsOnFeed }) => {
       content: post?.content,
       image: post?.image,
     }));
-    setPostUpdate("")
+    setPostUpdate("");
   };
 
+  //Show Single Post
+
+  const showSinglePost = (postId) => {
+    navigate(`/post/${postId}`);
+  }
 
   return (
     <>
@@ -118,7 +126,9 @@ export const PostsPage = ({ postsOnFeed }) => {
           postId={currentPostId}
         />
 
-        {postsOnFeed.map((post) => {
+        {isLoading && <Loader />}
+        
+        {!isLoading && postsOnFeed.map((post) => {
           const {
             _id,
             content,
@@ -127,7 +137,17 @@ export const PostsPage = ({ postsOnFeed }) => {
             fullname,
             username,
             createdAt,
+            comments,
           } = post;
+
+          const date = new Date(createdAt);
+          const [month, day, year, hour, minutes] = [
+            date.getMonth(),
+            date.getDate(),
+            date.getFullYear(),
+            date.getHours(),
+            date.getMinutes(),
+          ];
 
           const userFound = state.users.find(
             (user) => user.username === username
@@ -199,6 +219,10 @@ export const PostsPage = ({ postsOnFeed }) => {
                     </p>
                   </div>
 
+                  <p id="post-time">{`${day}/${
+                    +month + 1
+                  }/${year} ${hour}:${minutes}`}</p>
+
                   <p className="post-content">{content}</p>
                   {image && (
                     <img src={image} alt="username" className="content-image" />
@@ -229,10 +253,14 @@ export const PostsPage = ({ postsOnFeed }) => {
                       </>
                     )}
 
-                    <FontAwesomeIcon
-                      icon={faComment}
-                      className="post-action-btns"
-                    />
+                    <p className="like-count">{comments?.length ?? 0}</p>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faComment}
+                        className="post-action-btns"
+                        onClick={() => showSinglePost(_id)}
+                      />
+                    </div>
 
                     {bookmarkedPost ? (
                       <FontAwesomeIcon
@@ -250,6 +278,7 @@ export const PostsPage = ({ postsOnFeed }) => {
 
                     <FontAwesomeIcon
                       icon={faShare}
+                      onClick={() => toast.success("Copied Link")}
                       className="post-action-btns"
                     />
                   </div>

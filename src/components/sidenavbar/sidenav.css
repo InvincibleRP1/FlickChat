@@ -19,7 +19,7 @@
   }
 
   .sidenav-btn {
-    width: 5rem;
+    width: 6rem;
     position: relative;
     left: 33%;
     /* top: 30%; */
@@ -28,6 +28,11 @@
     border-radius: 6px;
     background-color: rgb(184, 29, 29);
     color: white;
+    cursor: pointer;
+  }
+
+  .sidenav-btn > span {
+    margin-left: 10px;
   }
 
   .nav-icon {
