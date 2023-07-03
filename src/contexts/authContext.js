@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
@@ -29,13 +29,11 @@ export const AuthHandler = ({ children }) => {
 
       setToken(encodedToken);
       setCurrentUser(foundUser);
-      toast.success("Login Successful!");
-     
+      
     } catch (error) {
       console.log(Error.message);
     }
   };
-
 
   const handleLogout = () => {
     localStorage.removeItem("login");

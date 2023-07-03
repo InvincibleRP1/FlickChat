@@ -7,6 +7,7 @@ import { TopNavigation } from "../../components/navbar/navbar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 export const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -64,13 +65,13 @@ export const SignUpPage = () => {
             confirmedPassword
           );
         } else if (!email.includes("@")) {
-          console.log("Invalid Email!");
+          toast.warning("Invalid Email!");
         } else if (password !== confirmedPassword) {
-          console.log("Passwords don't match!");
+          toast.warning("Passwords don't match!");
         }
       }
     } else {
-      console.log("Fields cannot be empty!");
+      toast.warning("Fields cannot be empty!");
     }
   };
 

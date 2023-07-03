@@ -133,7 +133,7 @@ export const SocialDetailsHandler = ({ children }) => {
 
         dispatch({ type: "initialize-posts", posts: posts });
 
-        toast.error("Post Deleted");
+        toast.success("Post Deleted");
       }
     } catch (error) {
       console.log(error.message);

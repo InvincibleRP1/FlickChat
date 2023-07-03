@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import "../auth/auth.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,14 +24,24 @@ export const LoginPage = () => {
   const location = useLocation();
 
   const guestloggingIn = () => {
-    setFormData({
+    setFormData((formVal) => ({
+      ...formVal,
       username: "moviebuffrahul",
       password: "heythere234",
-    });
+    })
+    
+    );
+
+    toast.success("Login Successful!");
   };
 
   const loggingIn = () => {
-    handleLogin(formData.username, formData.password);
+    if(formData?.username !== "" && formData?.password !== "")
+    {
+      handleLogin(formData.username, formData.password);
+      toast.success("Login Successful!");
+    }
+    
   }
 
   const passwordToggle = () => {
@@ -92,7 +103,9 @@ export const LoginPage = () => {
           </div>
 
           <div className="signin-buttons">
-            <button className="auth-action-btn">Log In</button>
+            <button className="auth-action-btn"
+            onClick={loggingIn}
+            >Log In</button>
             <button className="auth-action-btn" onClick={guestloggingIn}>
               Login with test credentials
             </button>

@@ -78,7 +78,7 @@ export const SideNav = () => {
 
         <div className="sidenav-links add-btn" onClick={handleAddPost}>
           <FontAwesomeIcon icon={faPlus} />
-          <span> Create</span>
+          <span> Post</span>
         </div>
 
         {showCreatePostModal && (

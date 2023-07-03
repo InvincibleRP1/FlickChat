@@ -1,13 +1,5 @@
-import { useContext, useState, useEffect } from "react";
-import Avatar from "react-avatar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faComment,
-  faBookmark,
-  faShare,
-  faEllipsis,
-} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useState} from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 //
@@ -20,7 +12,8 @@ import { SortPosts } from "../sort-posts/sortPosts";
 import { BookmarkContext } from "../../contexts/bookmarksContext";
 import { PostModal } from "../postModal/postModal";
 import { Loader } from "../loader/loader";
-import { toast } from "react-toastify";
+
+import { PostDetails } from "./postDetails";
 
 export const PostsPage = ({ postsOnFeed }) => {
   const { handleCreatePosts, deletePosts, getSingleUser, state } =
@@ -52,7 +45,7 @@ export const PostsPage = ({ postsOnFeed }) => {
     navigate(`/profile/${userId}`);
   };
 
-  const { handleLikes, handleDislikes, postsLikedByUser, handleUnfollowUser, isLoading } =
+  const { handleLikes, handleDislikes, postsLikedByUser, handleUnfollowUser, handleFollowUser, isLoading } =
     useContext(SocialDataContext);
 
   const { addToBookmarks, postPresentInBookmarks, removeFromBookmarks } =
@@ -75,6 +68,13 @@ export const PostsPage = ({ postsOnFeed }) => {
   const unfollowUser = (userId) => {
     console.log(userId);
     handleUnfollowUser(userId);
+    setPostUpdate("");
+  };
+
+  const followUser = (userId) => {
+    console.log(userId);
+    handleFollowUser(userId);
+    setPostUpdate("");
   };
 
   // Edit Post
@@ -128,6 +128,10 @@ export const PostsPage = ({ postsOnFeed }) => {
         />
 
         {isLoading && <Loader />}
+
+        {postsOnFeed?.length === 0 && <p className="no-bookmarks-title">
+          Follow users to see posts on feed
+          </p>}
         
         {!isLoading && postsOnFeed.map((post) => {
           const {
@@ -141,14 +145,7 @@ export const PostsPage = ({ postsOnFeed }) => {
             comments,
           } = post;
 
-          const date = new Date(createdAt);
-          const [month, day, year, hour, minutes] = [
-            date.getMonth(),
-            date.getDate(),
-            date.getFullYear(),
-            date.getHours(),
-            date.getMinutes(),
-          ];
+        
 
           const userFound = state.users.find(
             (user) => user.username === username
@@ -162,129 +159,25 @@ export const PostsPage = ({ postsOnFeed }) => {
 
           return (
             <div key={_id}>
-              <ul className="post-details">
-                <li className="post-specs">
-                  <FontAwesomeIcon
-                    icon={faEllipsis}
-                    className="post-update-section"
-                    onClick={() => handlePostUpdation(_id)}
-                  />
-
-                  {postUpdate === _id && currentUser.username === username ? (
-                    <div className="post-update-section update-details">
-                      <p
-                        className="update-options"
-                        onClick={() => handleEditPost(post)}
-                      >
-                        Edit
-                      </p>
-                      <hr />
-                      <p
-                        className="update-options"
-                        onClick={() => deletePosts(_id)}
-                      >
-                        Delete
-                      </p>
-                    </div>
-                  ) : postUpdate === _id &&
-                    currentUser.username !== username ? (
-                    <div className="post-update-section update-details">
-                      <p
-                        className="update-options"
-                        onClick={() => unfollowUser(userFound?._id)}
-                      >
-                        Unfollow
-                      </p>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-
-                  <div
-                    className="post-creator-details"
-                    onClick={() => checkIndividualUser(userFound._id)}
-                  >
-                    <Avatar
-                      name={fullname}
-                      src={userFound?.avatar}
-                      round={true}
-                      size="50"
-                    />
-
-                    <p className="user-name">
-                      {userFound?.firstName
-                        .concat(" ")
-                        .concat(userFound?.lastName)}
-                      <br />
-                      <span>@{username}</span>
-                    </p>
-                  </div>
-
-                  <p id="post-time">{`${day}/${
-                    +month + 1
-                  }/${year} ${hour}:${minutes}`}</p>
-
-                  <p className="post-content">{content}</p>
-                  {image && (
-                    <img src={image} alt="username" className="content-image" />
-                  )}
-
-                  <div className="action-btns">
-                    {likedPost ? (
-                      <>
-                        <p className="like-count">{likeCount}</p>
-                        <div>
-                          <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className="post-action-btns dislike-post"
-                            onClick={() => dislikePost(_id)}
-                          />
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="like-count">{likeCount}</p>
-                        <div>
-                          <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className="post-action-btns"
-                            onClick={() => likePost(_id)}
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    <p className="like-count">{comments?.length ?? 0}</p>
-                    <div>
-                      <FontAwesomeIcon
-                        icon={faComment}
-                        className="post-action-btns"
-                        onClick={() => showSinglePost(_id)}
-                      />
-                    </div>
-
-                    {bookmarkedPost ? (
-                      <FontAwesomeIcon
-                        icon={faBookmark}
-                        className="post-action-btns remove-bookmark"
-                        onClick={() => removeFromBookmarks(_id)}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faBookmark}
-                        className="post-action-btns"
-                        onClick={() => addToBookmarks(_id)}
-                      />
-                    )}
-
-                    <FontAwesomeIcon
-                      icon={faShare}
-                      onClick={() => toast.success("Copied Link")}
-                      className="post-action-btns"
-                    />
-                  </div>
-                </li>
-              </ul>
+              <PostDetails 
+              handleEditPost={handleEditPost}
+              handlePostUpdation={handlePostUpdation}
+              post={post}
+              currentUser={currentUser}
+              postUpdate={postUpdate}
+              deletePosts={deletePosts}
+              unfollowUser={unfollowUser}
+              followUser={followUser}
+              userFound={userFound}
+              checkIndividualUser={checkIndividualUser}
+              likePost={likePost}
+              dislikePost={dislikePost}
+              removeFromBookmarks={removeFromBookmarks}
+              addToBookmarks={addToBookmarks}
+              showSinglePost={showSinglePost}
+              bookmarkedPost={bookmarkedPost}
+              likedPost={likedPost}
+              />
             </div>
           );
         })}

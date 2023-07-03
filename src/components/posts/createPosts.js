@@ -103,7 +103,8 @@ export const CreatePosts = ({
             </div>
             }
 
-            <button className="post-create-btn" onClick={handleCreatePost}>
+            <button className="post-create-btn" onClick={handleCreatePost}
+            >
               Post
             </button>
             

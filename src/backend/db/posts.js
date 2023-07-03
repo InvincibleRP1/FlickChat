@@ -14,7 +14,7 @@ export const posts = [
     image:
       "https://i.pinimg.com/originals/44/59/8f/44598f0b489e869c0941e12873f1f4c2.gif",
     likes: {
-      likeCount: 0,
+      likeCount: 1,
       likedBy: [],
       dislikedBy: [],
     },
@@ -43,7 +43,7 @@ export const posts = [
     image:
       "https://ik.imagekit.io/qsdtqu5hp/FlickChat/post-two-real.jpg?updatedAt=1686297746620",
     likes: {
-      likeCount: 0,
+      likeCount: 4,
       likedBy: [],
       dislikedBy: [],
     },
@@ -84,7 +84,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "harrypaaji",
+        username: "taani234",
         text: "Even I am excited to watch it!"
       }
     ],
@@ -127,15 +127,15 @@ export const posts = [
   {
     _id: uuid(),
     content: "Oppenheimer is going to be the film of the year",
-    image: "",
+    image: "https://64.media.tumblr.com/e5286ae5c12987113e3b867ae9a8f5f1/2ef0f36104e872a1-ba/s540x810/e3e84cb527c2821b9141d7e969f68011571033c6.gif",
     likes: {
       likeCount: 7,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    fullname: "Harry Singh",
-    username: "harrypaaji",
+    fullname: "Taani Singh",
+    username: "taani234",
     createdAt: "2023-06-27T13:40:12+05:30",
     updatedAt: formatDate(),
   },
