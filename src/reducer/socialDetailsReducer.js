@@ -4,7 +4,8 @@ export const initialState = {
   sortValue: "",
   searchValue: "",
   userPosts: [],
-  userProfile: []
+  userProfile: [],
+  createModal: false
 };
 
 export const socialReducer = (currentState, action) => {
@@ -39,6 +40,11 @@ export const socialReducer = (currentState, action) => {
     case "individual-user-profile":
       return {...currentState,
       userProfile: action.profile
+      }
+
+    case "create-modal":
+      return {...currentState,
+      createModal: action.value
       }
 
     default:

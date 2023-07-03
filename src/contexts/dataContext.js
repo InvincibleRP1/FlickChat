@@ -305,8 +305,7 @@ export const SocialDetailsHandler = ({ children }) => {
       ));
     } else if (state?.sortValue === "latest") {
       return (duplicatedPosts = [...posts].sort(
-        (a, b) => b.createdAt - a.createdAt
-      )).reverse();
+        (a, b) => b.createdAt.localeCompare(a.createdAt)));
     }
 
     return duplicatedPosts;

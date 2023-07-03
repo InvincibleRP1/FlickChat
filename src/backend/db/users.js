@@ -85,7 +85,7 @@ export const users = [
       },
     ],
     avatar:
-      "https://media.licdn.com/dms/image/D4D03AQH0Yh8t7arEfA/profile-displayphoto-shrink_400_400/0/1682543183081?e=1692230400&v=beta&t=JMbY-pYK8mDItC1oT0Uqc9MhHHdT9y_8NPcyzAza19o",
+      "https://media1.popsugar-assets.com/files/thumbor/YXenqAv1DM0a6zKblc7N7cKq9HI/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2016/10/31/865/n/1922283/fa195d0358179f86a4f154.35463525_edit_img_image_2387502_1477943004/i/Charlie-Hunnam-Sons-Anarchy-Pictures.jpg",
     bio: "Learner",
     link: "https://rahulpandeyportfolio.netlify.app/",
     createdAt: formatDate(),
@@ -159,7 +159,7 @@ export const users = [
   {
     _id: "user005",
     firstName: "Barry",
-    lastName: "Cooper",
+    lastName: "Allen",
     username: "theflash",
     email: "theflash@gmail.com",
     password: "hello123",

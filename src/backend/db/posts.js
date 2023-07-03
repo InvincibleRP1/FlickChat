@@ -12,7 +12,7 @@ export const posts = [
     content:
       "One of the standout aspects of Drive is its visual aesthetic. Refn creates a visually stunning world, using bold and vibrant colors to enhance the film's gritty atmosphere. The cinematography by Newton Thomas Sigel is exceptional, capturing both the stillness and the chaos with precision. The use of lighting and shadows adds depth and suspense to the scenes, creating a distinct neo-noir ambiance.",
     image:
-      "https://ik.imagekit.io/qsdtqu5hp/FlickChat/Post-one.png?updatedAt=1686297581882",
+      "https://i.pinimg.com/originals/44/59/8f/44598f0b489e869c0941e12873f1f4c2.gif",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -88,7 +88,7 @@ export const posts = [
         text: "Even I am excited to watch it!"
       }
     ],
-    fullname: "Barry Cooper",
+    fullname: "Barry Allen",
     username: "theflash",
     createdAt: "2023-04-05T10:38:12+05:30",
     updatedAt: formatDate(),
@@ -121,6 +121,54 @@ export const posts = [
     fullname: "Micheal Smith",
     username: "dazzlingsmiths",
     createdAt: "2023-07-02T10:38:12+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: uuid(),
+    content: "Oppenheimer is going to be the film of the year",
+    image: "",
+    likes: {
+      likeCount: 7,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    fullname: "Harry Singh",
+    username: "harrypaaji",
+    createdAt: "2023-06-27T13:40:12+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: uuid(),
+    content: "City of God is a cinematic gem that left me in awe! The mesmerizing storytelling, brilliant performances, and stunning cinematography make it an unforgettable experience. A powerful exploration of crime, poverty, and hope against all odds. Truly a masterpiece that demands your attention!",
+    image: "",
+    likes: {
+      likeCount: 12,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    fullname: "John Doe",
+    username: "johndoe",
+    createdAt: "2023-06-28T12:30:12+05:30",
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: uuid(),
+    content: "What a dull day it has been",
+    image: "",
+    likes: {
+      likeCount: 2,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments: [],
+    fullname: "Cine Prism",
+    username: "cineprism",
+    createdAt: "2023-06-30T16:04:12+05:30",
     updatedAt: formatDate(),
   },
 ];

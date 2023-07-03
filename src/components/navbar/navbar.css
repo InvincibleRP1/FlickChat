@@ -11,7 +11,7 @@
     /* gap: 50rem; */
     align-items: center;
     padding: 3px;
-    background-color: #463f35;
+    background-color: hsl(0, 13%, 18%);
     color: azure;
     margin: -8px -8px;
 }
@@ -29,6 +29,12 @@
 .current-user {
     padding: 40px;
     font-weight: bold;
+    text-decoration: none;
+    color: azure;
+}
+
+.current-user:hover {
+    text-decoration: underline;
 }
 
 

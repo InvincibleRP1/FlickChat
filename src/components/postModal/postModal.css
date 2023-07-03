@@ -1,23 +1,39 @@
 .post-form-modal {
-    position: fixed;
-    left: 30%;
-    top: 12%;
-    background-color: rgb(101, 90, 77);
-    color: black;
-    z-index: 200;
-    font-weight: 600;
-    border-radius: 20px;
-    box-shadow: 2px 3px 5px black;
-    padding: 20px;
-    width: 35rem;
+  position: fixed;
+  left: 30%;
+  top: 12%;
+  background-color: rgb(101, 90, 77);
+  color: black;
+  z-index: 200;
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: 2px 3px 5px black;
+  padding: 20px;
+  width: 35rem;
 }
 
 #file-edit-upload {
-    display: none;
+  display: none;
 }
 
 .close-edit-tab {
-    float: right;
-    font-size: 25px;
-    font-weight: bolder;
+  float: right;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+@media (max-width: 1300px) {
+  .post-form-modal {
+    position: fixed;
+    left: 0;
+    top: 12%;
+    color: black;
+    z-index: 200;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: 2px 3px 5px black;
+    padding: 20px;
+    width: fit-content;
+  }
 }

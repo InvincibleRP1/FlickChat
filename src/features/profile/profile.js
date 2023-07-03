@@ -4,7 +4,7 @@ import { SideNav } from '../../components/sidenavbar/sidenav'
 import { UserProfile } from '../../components/userProfile/userProfile'
 import { UserSuggestion } from '../../components/userSuggestion/userSuggestion'
 import { AuthContext } from '../../contexts/authContext'
-import { PostModal } from '../../components/postModal/postModal'
+
 export const ProfilePage = () => {
 
    const { currentUser } = useContext(AuthContext);
@@ -16,7 +16,10 @@ export const ProfilePage = () => {
             <SideNav />
             <UserSuggestion />
             
+            <div>
             <UserProfile user={currentUser}/>
+            </div>
+            
             
         </div>
     )

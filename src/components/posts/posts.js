@@ -1,8 +1,5 @@
 import { useContext, useState, useEffect } from "react";
 import Avatar from "react-avatar";
-
-import { SocialDataContext } from "../../contexts/dataContext";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faThumbsUp,
@@ -11,11 +8,14 @@ import {
   faShare,
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate } from "react-router-dom";
+
+//
 
 import "../posts/posts.css";
+import { SocialDataContext } from "../../contexts/dataContext";
 import { AuthContext } from "../../contexts/authContext";
 import { CreatePosts } from "./createPosts";
-import { useLocation, useNavigate } from "react-router-dom";
 import { SortPosts } from "../sort-posts/sortPosts";
 import { BookmarkContext } from "../../contexts/bookmarksContext";
 import { PostModal } from "../postModal/postModal";
@@ -44,6 +44,7 @@ export const PostsPage = ({ postsOnFeed }) => {
     }
 
     setFormData({ ...formData, content: "", image: null });
+
   };
 
   const checkIndividualUser = (userId) => {

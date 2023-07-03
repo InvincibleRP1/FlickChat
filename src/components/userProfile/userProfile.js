@@ -8,6 +8,7 @@ import "../userProfile/userProfile.css";
 import { SocialDataContext } from "../../contexts/dataContext";
 import { EditProfileModal } from "./editProfileModal";
 
+
 export const UserProfile = ({ user }) => {
   const { currentUser } = useContext(AuthContext);
 
@@ -44,7 +45,9 @@ export const UserProfile = ({ user }) => {
     <div>
 
         
-      <div className="profile-area">
+      <div className="profile-area"
+      style={{zIndex: state?.createModal ? "-1" : ""}}
+      >
         
       <EditProfileModal formData={formData} showModal={showModal} setShowModal={setShowModal} setFormData={setFormData}
       user={user}

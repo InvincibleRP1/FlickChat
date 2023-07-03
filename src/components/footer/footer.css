@@ -6,7 +6,7 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    background-color: #463f35;
+    background-color: hsl(0, 13%, 18%);;
 }
 
 .footer-desc {
@@ -32,4 +32,10 @@
 .social-links-names {
     font-size: 25px;
     color: aliceblue;
+}
+
+@media (max-width: 1300px) {
+    .footer-area {
+        display: none;
+    }
 }

@@ -19,7 +19,7 @@ export const CreatePosts = ({
   showCreatePost
 }) => {
   const { currentUser } = useContext(AuthContext);
-  const { dispatch } = useContext(SocialDataContext);
+  const { dispatch, state } = useContext(SocialDataContext);
 
   const [imageSelected, setImageSelected] = useState(false);
 
@@ -30,6 +30,7 @@ export const CreatePosts = ({
     setImageSelected(false);
     setEmojiSelected(false);
     dispatch({ type: "post-sort-method", value: "latest" });
+    dispatch({type: "create-modal", value: !state?.createModal});
   }
 
   const handleImageUpload = (e) => {
@@ -53,7 +54,7 @@ export const CreatePosts = ({
   return (
     <div>
       {showCreatePost && (
-        <div>
+        <div className="post-create-area">
           <div className="create-post-section">
             <Avatar
               round={true}

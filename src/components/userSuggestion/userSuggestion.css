@@ -20,7 +20,7 @@
 .user-details {
     display: flex;
     justify-content: space-between;
-    border-bottom: 0.3px solid rgb(96, 96, 96);
+    /* border-bottom: 0.3px solid rgb(96, 96, 96); */
     gap: 0rem;
     
 }
@@ -37,7 +37,8 @@
     margin: 15px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #daffef;
+    background-color: hsl(0deg 51.62% 46.37%);;
+    color: azure;
     border: none;
     border-radius: 8px;
 }
@@ -58,4 +59,10 @@
 
 .user-list-info {
     text-align: center;
+}
+
+@media (max-width: 1300px) {
+    .user-list-area {
+        display: none;
+    }
 }

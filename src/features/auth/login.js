@@ -22,12 +22,16 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const loggingIn = () => {
+  const guestloggingIn = () => {
     setFormData({
       username: "moviebuffrahul",
       password: "heythere234",
     });
   };
+
+  const loggingIn = () => {
+    handleLogin(formData.username, formData.password);
+  }
 
   const passwordToggle = () => {
     setShowPassword((prevVal) => !prevVal);
@@ -89,7 +93,7 @@ export const LoginPage = () => {
 
           <div className="signin-buttons">
             <button className="auth-action-btn">Log In</button>
-            <button className="auth-action-btn" onClick={loggingIn}>
+            <button className="auth-action-btn" onClick={guestloggingIn}>
               Login with test credentials
             </button>
           </div>
