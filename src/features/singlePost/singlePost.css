@@ -81,3 +81,14 @@
     border: 1px solid grey;
     border-radius: 5px;
 }
+
+@media (max-width: 1300px) {
+    .comments-section {
+    margin-top: 0rem;
+    margin-left: 0;
+    width: fit-content;
+    padding: 20px;
+    position: static;
+    overflow: scroll;
+    }
+}
