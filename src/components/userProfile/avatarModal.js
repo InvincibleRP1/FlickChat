@@ -12,16 +12,16 @@ export const AvatarModal = ({showAvatarModal, setShowAvatarModal, user}) => {
     const { editUserProfile, formData } = useContext(SocialDataContext);
 
 
-    const avatars = ['https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar.png?updatedAt=1687787334661',
+    const avatars = ['https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/46356734.jpg?updatedAt=1688543380993',
 
-    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar2.png?updatedAt=1687787335997',
+    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/46356735.jpg?updatedAt=1688543877251',
 
     'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar3.png?updatedAt=1687787334737'
     ,
 
-    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar4.png?updatedAt=1687787335238',
+    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/46356768.jpg?updatedAt=1688543771981',
 
-    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar5.png?updatedAt=1687787335811',
+    'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/21372076.jpg?updatedAt=1688543267724',
 
     'https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar6.png?updatedAt=1687787335229'
 ];
