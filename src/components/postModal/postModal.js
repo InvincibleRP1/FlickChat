@@ -1,18 +1,16 @@
 import { useContext, useState } from "react";
-import { CreatePosts } from "../posts/createPosts";
-import { SocialDataContext } from "../../contexts/dataContext";
 import Avatar from "react-avatar";
-import "../postModal/postModal.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faImage,
   faFaceSmile,
   faClose,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useLocation } from "react-router-dom";
+
+import { SocialDataContext } from "../../contexts/dataContext";
+import "../postModal/postModal.css";
+
 import { AuthContext } from "../../contexts/authContext";
 import EmojiPicker from "emoji-picker-react";
 

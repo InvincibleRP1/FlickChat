@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { createContext,  useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
@@ -68,7 +68,6 @@ export const AuthHandler = ({ children }) => {
     }
   }; 
 
-  console.log(token, currentUser);
 
   return (
     <AuthContext.Provider

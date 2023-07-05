@@ -1,8 +1,9 @@
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 import "../navbar/navbar.css";
 import { AuthContext } from "../../contexts/authContext";
-import { NavLink } from "react-router-dom";
+
 
 
 export const TopNavigation = () => {
@@ -18,8 +19,6 @@ export const TopNavigation = () => {
         />
 
         <div className="nav-details">
-
-          {/* <FontAwesomeIcon icon={faToggleOn} className="display-mode" /> */}
           
           {token && <NavLink className="current-user" to="/profile">Hi, {currentUser?.firstName}</NavLink>}
         </div>

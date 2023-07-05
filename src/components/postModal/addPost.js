@@ -1,10 +1,9 @@
 import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+
 import { CreatePosts } from "../posts/createPosts"
 import { SocialDataContext } from "../../contexts/dataContext";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 
 export const AddPostModal = ({showCreatePostModal, setCreatePostModal}) => {
