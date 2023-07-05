@@ -2,7 +2,7 @@
 
 A Social Media web app. 
 
-Checkout the Web App here - [FlickChat]((http://flick-chat.vercel.app/))
+Checkout the Web App here - [FlickChat](http://flick-chat.vercel.app/)
 
 ## How to install and run locally ? 
 
