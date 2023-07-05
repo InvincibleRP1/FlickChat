@@ -13,6 +13,7 @@ import { IndividualUser } from "./features/individual-user/individualUser";
 import { SignUpPage } from "./features/auth/signup";
 import { SinglePost } from "./features/singlePost/singlePost";
 import { PrivateRoute } from "./components/privateRoute/privateRoute";
+import { ErrorPage } from "./components/errorPage/errorPage";
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
         />
 
         <Route path="/test" element={<APITest />} />
+        <Route path="*" element={<ErrorPage />}/>
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />

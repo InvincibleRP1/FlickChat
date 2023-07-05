@@ -33,3 +33,9 @@ body {
    text-align: center;
    margin-top: 3rem;
 }
+
+.error-heading {
+   text-align: center;
+   color: azure;
+   margin: 50px auto; 
+}
