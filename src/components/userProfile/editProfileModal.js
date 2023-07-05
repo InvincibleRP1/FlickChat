@@ -133,7 +133,7 @@ export const EditProfileModal = ({
           <br />
 
           <div className="user-links">
-            <label>Link</label>
+            <label>Portfolio URL</label>
             <input
               type="text"
               value={formData.link}

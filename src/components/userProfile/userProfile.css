@@ -53,6 +53,11 @@
     font-weight: 600;
 }
 
+.profile-action-btn:hover {
+    background-color: #325044;
+    color: azure;
+}
+
 /* Edit Form Modal */
 
 .edit-form-modal {
@@ -124,6 +129,11 @@ textarea {
     border-radius: 10px;
 }
 
+.action-btn:hover {
+    background-color: #325044;
+    color: azure;
+}
+
 .close-btn {
     background-color: rgb(184, 29, 29);
     color: white;
@@ -147,7 +157,7 @@ textarea {
 }
 
 .profile-action-icon {
-    color: rgb(30, 47, 73);
+    color: azure;
     position: absolute;
     bottom: 2rem;
     right: 12em;

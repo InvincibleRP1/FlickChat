@@ -36,6 +36,7 @@
     background-color: rgb(190, 229, 244);
     padding: 12px;
     border: none;
+    position: relative;
     border-radius: 15px;
     font-size: 14px;
 }
@@ -67,7 +68,7 @@
 
 .comment-changes {
     position: absolute;
-    float: right;  
+    right: 0;  
     background-color: #3a3d67;
     padding: 10px;
     border-radius: 10px;

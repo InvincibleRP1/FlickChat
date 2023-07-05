@@ -5,14 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/authContext";
 import { SocialDataContext } from "../../contexts/dataContext";
 
 export const AvatarModal = ({showAvatarModal, setShowAvatarModal, user}) => {
 
     const { editUserProfile, formData } = useContext(SocialDataContext);
 
-    const { currentUser, setCurrentUser } = useContext(AuthContext);
 
     const avatars = ['https://ik.imagekit.io/qsdtqu5hp/FlickChat/Avatars/avatar.png?updatedAt=1687787334661',
 
