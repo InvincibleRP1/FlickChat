@@ -18,7 +18,6 @@ export const SinglePost = () => {
   const { currentUser } = useContext(AuthContext);
 
   const [commentFormData, setCommentFormData] = useState({
-    _id: uuid(),
     text: "",
     username: currentUser?.username,
   });
@@ -32,9 +31,13 @@ export const SinglePost = () => {
   const filteredPost = state?.posts?.filter((post) => post._id === postId);
 
   const addComment = (commentAddpostId) => {
+    console.log(state?.posts);
     const newPosts = state?.posts?.map((post) =>
       post._id === commentAddpostId
-        ? { ...post, comments: [...post?.comments, commentFormData] }
+        ? {
+            ...post,
+            comments: [...post?.comments, { ...commentFormData, _id: uuid() }],
+          }
         : post
     );
 
@@ -66,8 +69,8 @@ export const SinglePost = () => {
   const handleDeleteComment = (comment) => {
     const newPost = state?.posts?.find((post) => post._id === postId);
 
-    const updateComments = newPost.comments.filter((comments) =>
-      comments._id !== comment._id
+    const updateComments = newPost.comments.filter(
+      (comments) => comments._id !== comment._id
     );
 
     const updatedPosts = state?.posts.map((post) =>
@@ -78,10 +81,9 @@ export const SinglePost = () => {
 
     setEditOption(false);
     setShowCommentUpdate("");
-  }
+  };
 
   const saveComment = () => {
-    
     const newPost = state?.posts?.find((post) => post._id === postId);
 
     const updateComments = newPost.comments.map((comment) =>
@@ -91,7 +93,6 @@ export const SinglePost = () => {
     const updatedPosts = state?.posts.map((post) =>
       post._id === newPost._id ? { ...post, comments: updateComments } : post
     );
-
 
     dispatch({ type: "initialize-posts", posts: updatedPosts });
 
@@ -187,9 +188,9 @@ export const SinglePost = () => {
                               </p>
                             }
                             <hr />
-                            <p
-                            onClick={() => handleDeleteComment(comment)}
-                            >Delete</p>
+                            <p onClick={() => handleDeleteComment(comment)}>
+                              Delete
+                            </p>
                           </div>
                         )}
                         <br />
