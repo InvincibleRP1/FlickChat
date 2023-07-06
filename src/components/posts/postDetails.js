@@ -129,7 +129,9 @@ export const PostDetails = ({
                     +month + 1
                   }/${year} ${hour}:${minutes}`}</p>
 
-                  <p className="post-content">{content}</p>
+                  <p className="post-content"
+                  onClick={() => showSinglePost(_id)}
+                  >{content}</p>
                   {image && (
                     <img src={image} alt="username" className="content-image" />
                   )}

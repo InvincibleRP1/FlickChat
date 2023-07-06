@@ -58,9 +58,8 @@
 
 .post-content {
   color: rgb(189, 185, 185);
-  /* font-family: 'Jost', sans-serif; */
   font-family: "Heebo", sans-serif;
-  /* font-size: 16px; */
+  cursor: pointer;
 }
 
 .content-image {
